@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة غير موجودة | دليل</title>
+    
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧭</text></svg>">
+    
+    <style>
+        :root {
+            /* Light Theme Colors */
+            --primary: #2563EB;
+            --primary-dark: #1d4ed8;
+            --secondary: #10B981;
+            --accent: #8B5CF6;
+            --light: #F8FAFC;
+            --dark: #1E293B;
+            --gray: #64748B;
+            --background: #FFFFFF;
+            --card: #F1F5F9;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        [data-theme="dark"] {
+            --primary: #60A5FA;
+            --primary-dark: #3B82F6;
+            --secondary: #34D399;
+            --accent: #A78BFA;
+            --light: #1E293B;
+            --dark: #F1F5F9;
+            --gray: #94A3B8;
+            --background: #0F172A;
+            --card: #1E293B;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --gradient-1: linear-gradient(135deg, #4f46e5 0%, #7e22ce 100%);
+            --gradient-2: linear-gradient(135deg, #db2777 0%, #ea580c 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--background);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Animated Background */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: -100px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            left: -150px;
+            background: var(--gradient-2);
+            animation: float 25s infinite ease-in-out reverse;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 40%;
+            background: var(--primary);
+            animation: float 18s infinite ease-in-out;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -50px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 40px) rotate(240deg);
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            width: 56px;
+            height: 56px;
+            background: var(--card);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            box-shadow: 0 8px 32px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 40px var(--shadow);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .sun-icon, .moon-icon {
+            width: 24px;
+            height: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .sun-icon {
+            color: #F59E0B;
+            display: none;
+        }
+
+        .moon-icon {
+            color: #8B5CF6;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            display: none;
+        }
+
+        /* Error Container */
+        .error-container {
+            max-width: 640px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 20px 60px var(--shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        /* Compass Animation */
+        .compass-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 3rem;
+        }
+
+        .compass-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(20px);
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        .compass-icon {
+            width: 100%;
+            height: 100%;
+            color: var(--primary);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 12px rgba(37, 99, 235, 0.3));
+        }
+
+        .compass-icon .needle {
+            transform-origin: center;
+            animation: compass-spin 30s linear infinite;
+        }
+
+        .compass-icon:hover .needle {
+            animation-play-state: paused;
+        }
+
+        @keyframes compass-spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.15;
+            }
+        }
+
+        /* Error Text */
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .error-message {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: var(--gray);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Buttons */
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--dark);
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px var(--shadow);
+        }
+
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Navigation Indicator */
+        .nav-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gray);
+            font-size: 0.875rem;
+            z-index: 10;
+            text-align: center;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                left: 1rem;
+                width: 48px;
+                height: 48px;
+            }
+
+            .error-container {
+                padding: 2rem 1.5rem;
+                margin-top: 3rem;
+                border-radius: 24px;
+            }
+
+            .compass-wrapper {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 2rem;
+            }
+
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .error-message {
+                font-size: 1.125rem;
+                margin-bottom: 2rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                min-width: auto;
+            }
+
+            .nav-indicator {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.75rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-dots {
+            display: inline-flex;
+            gap: 0.25rem;
+        }
+
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: dots-bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes dots-bounce {
+            0%, 80%, 100% { 
+                transform: scale(0);
+                opacity: 0.3;
+            }
+            40% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+
+    <!-- Error Content -->
+    <div class="error-container">
+        <!-- Animated Compass -->
+        <div class="compass-wrapper">
+            <div class="compass-background"></div>
+            <svg class="compass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon class="needle" points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <!-- Error Text -->
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">يبدو إنك تهت عن المسار! 🧭</h2>
+        <p class="error-message">
+            الصفحة اللي بتدور عليها ما لقيناها. يمكن تكون انتقلت لمكان جديد، 
+            أو يمكن تكون رحلت بالمرة! ما تيأس، رح نساعدك ترجع للمسار الصحيح 
+            وتكمل رحلتك بالبرمجة التنافسية.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="error-actions">
+            <a href="index.html" class="btn btn-primary">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                العودة للصفحة الرئيسية
+            </a>
+            <button onclick="history.back()" class="btn btn-secondary" id="backButton">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+                الرجوع للصفحة السابقة
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Indicator -->
+    <div class="nav-indicator">
+        دليلك موجود دائمًا لإرشادك 🧭
+    </div>
+
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+
+        // Apply saved theme
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Add transition
+            document.documentElement.style.transition = 'background-color 0.5s ease, color 0.5s ease';
+            
+            // Apply new theme
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Play click sound (optional)
+            const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ');
+            clickSound.volume = 0.1;
+            clickSound.play().catch(() => {});
+            
+            // Button animation
+            themeToggle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 150);
+        });
+
+        // Interactive Compass
+        const compass = document.querySelector('.compass-icon');
+        compass.addEventListener('click', function() {
+            const needle = this.querySelector('.needle');
+            
+            // Speed up animation
+            needle.style.animation = 'compass-spin 2s linear infinite';
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                needle.style.animation = 'compass-spin 30s linear infinite';
+            }, 2000);
+            
+            // Add visual feedback
+            this.style.filter = 'drop-shadow(0 8px 24px rgba(37, 99, 235, 0.5))';
+            setTimeout(() => {
+                this.style.filter = 'drop-shadow(0 4px 12px rgba(37, 99, 235, 0.3))';
+            }, 500);
+        });
+
+        // Back Button Animation
+        const backButton = document.getElementById('backButton');
+        backButton.addEventListener('click', function(e) {
+            // Check if there's history to go back to
+            if (history.length > 1) {
+                // Show loading state
+                const originalText = this.innerHTML;
+                this.innerHTML = `
+                    <span class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    جاري الرجوع...
+                `;
+                this.disabled = true;
+                
+                // Go back after short delay
+                setTimeout(() => {
+                    history.back();
+                }, 800);
+            } else {
+                // No history, redirect to home
+                e.preventDefault();
+                this.innerHTML = `
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    الذهاب للصفحة الرئيسية
+                `;
+                
+                // Redirect to home after animation
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 600);
+            }
+        });
+
+        // Page Load Animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                document.body.style.opacity = '1';
+                document.body.style.transform = 'translateY(0)';
+            }, 100);
+        });
+
+        // Floating shapes interaction
+        document.querySelector('.floating-shapes').addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const xOffset = (x - 0.5) * 100 * speed;
+                const yOffset = (y - 0.5) * 100 * speed;
+                
+                shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

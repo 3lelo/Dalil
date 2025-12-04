@@ -187,59 +187,6 @@
         }, 50));
     }
 
-    /**
-     * Add back to top button
-     */
-    function addBackToTop() {
-        const button = document.createElement('button');
-        button.innerHTML = '↑';
-        button.style.cssText = `
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-        `;
-        button.id = 'backToTop';
-        document.body.appendChild(button);
-
-        button.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        window.addEventListener('scroll', DalilUtils.throttle(() => {
-            if (window.pageYOffset > 300) {
-                button.style.opacity = '1';
-                button.style.visibility = 'visible';
-            } else {
-                button.style.opacity = '0';
-                button.style.visibility = 'hidden';
-            }
-        }, 100));
-
-        button.addEventListener('mouseenter', () => {
-            button.style.transform = 'scale(1.1)';
-        });
-
-        button.addEventListener('mouseleave', () => {
-            button.style.transform = 'scale(1)';
-        });
-    }
-
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);

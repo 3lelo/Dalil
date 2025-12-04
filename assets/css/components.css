@@ -321,7 +321,6 @@
 /* External Link Icon - Reusable */
 .external-link {
     position: relative;
-    padding-left: 1.5rem;
 }
 
 .external-link::after {

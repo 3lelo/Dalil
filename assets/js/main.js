@@ -50,23 +50,13 @@
         const dropdownTriggers = document.querySelectorAll('.algo-dropdown-trigger');
 
         dropdownTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function() {
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
                 const dropdown = this.parentElement;
-                const isActive = dropdown.classList.contains('active');
-
-                // Close all dropdowns
-                document.querySelectorAll('.algo-dropdown').forEach(d => {
-                    d.classList.remove('active');
-                });
-
-                // Toggle current dropdown
-                if (!isActive) {
-                    dropdown.classList.add('active');
-                }
+                dropdown.classList.toggle('active');
             });
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.algo-dropdown')) {
                 document.querySelectorAll('.algo-dropdown').forEach(d => {
@@ -75,6 +65,7 @@
             }
         });
     }
+
 
     /**
      * Setup external links to open in new tab

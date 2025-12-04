@@ -15,17 +15,16 @@
 
     .nav-links {
         position: fixed;
-        top: 70px;
+        top: 0;
         right: -100%;
         width: 80%;
-        max-width: 300px;
-        height: calc(100vh - 70px);
+        max-width: 250px;
+        height: 100vh;
         background: var(--white);
         flex-direction: column;
         padding: 2rem;
         box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
         transition: right 0.3s ease;
-        gap: 1rem;
     }
 
     .nav-links.active {
@@ -34,7 +33,6 @@
 
     .nav-link {
         width: 100%;
-        padding: 1rem;
         border-bottom: 1px solid var(--border);
         border-radius: 8px;
         transition: all 0.3s ease;
@@ -47,6 +45,7 @@
     .nav-link.active {
         background: var(--primary);
         color: var(--white);
+        padding-inline: 1rem;
         border-bottom-color: transparent;
     }
 
@@ -107,7 +106,7 @@
     }
 
     .process-arrow {
-        transform: rotate(90deg);
+        transform: rotate(270deg);
         font-size: 1.5rem;
     }
 
@@ -127,7 +126,7 @@
     }
 
     .roadmap-item {
-        flex-direction: row !important;
+        display: unset;
         padding-right: 0;
     }
 
@@ -142,6 +141,8 @@
     }
 
     .roadmap-content {
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
         flex: 1;
     }
 
@@ -286,6 +287,8 @@
     }
 
     .roadmap-content {
+        margin-top: 0.5rem; 
+        margin-bottom: 1.5rem;
         padding: 1.5rem;
     }
 
@@ -343,10 +346,6 @@
 
     .footer-logo {
         font-size: 1.5rem;
-    }
-
-    .footer-credit {
-        text-align: center;
     }
 }
 
