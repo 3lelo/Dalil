@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="دليل - دليلك الشامل للبرمجة التنافسية من الصفر حتى الاحتراف">
+    <title>دليل - البرمجة التنافسية</title>
+    
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧭</text></svg>">
+    <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><polygon points='16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76'/></svg>">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                </svg>
+                <span>دليل</span>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#why" class="nav-link">لماذا البرمجة</a></li>
+                <li><a href="#what" class="nav-link">البرمجة التنافسية</a></li>
+                <li><a href="#roadmap" class="nav-link">خارطة الطريق</a></li>
+                <li><a href="#community" class="nav-link">المجتمع</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-background"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title fade-in-up">البرمجة التنافسية: دليلك لاحتراف المنطق البرمجي</h1>
+            <h2 class="hero-subtitle fade-in-up delay-1">جاهز تغير طريقة تفكيرك؟ هاي مش بس لغة برمجة بتتعلمها، هذا "المفتاح" عشان تشغل مخك صح وتلاقي مسارك للنجاح بعالم التقنية.</h2>
+            <p class="hero-text fade-in-up delay-2">تعال معنا برحلة بسيطة وممتعة بعالم البرمجة التنافسية. "دليل" هو بوابتك عشان تبدأ من الصفر عالاخر، لحد ما تبني تفكير مبرمج محترف، خطوة بخطوة وبدون تعقيد.</p>
+            <button class="cta-button primary fade-in-up delay-3" onclick="window.location.href='#roadmap'">بلّش رحلتك هسا</button>
+        </div>
+    </section>
+
+    <!-- Why Section -->
+    <section id="why" class="section why-section">
+        <div class="container">
+            <h2 class="section-title">البرمجة: لغة العصر اللي بتحرك كل إشي</h2>
+            <p class="section-intro">البرمجة بطلت بس للـ "Geeks" والمختصين. صارت موجودة بكل تفصيل بحياتنا، من التطبيقات اللي بتستخدمها طول يومك للاكتشافات العلمية الكبيرة. باختصار؟ هي "فن إنك تلاقي حلول ذكية".</p>
+            
+            <div class="cards-grid">
+                <div class="card animate-on-scroll">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">تطوير الويب</h3>
+                    <p class="card-text">المواقع والتطبيقات اللي بتفتحها كل يوم، كلها مبنية بأسطر كود.</p>
+                </div>
+
+                <div class="card animate-on-scroll">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">تطبيقات الهواتف</h3>
+                    <p class="card-text">الأندرويد والـ iOS.. كيف فكرة براسك ممكن تصير تطبيق بإيد الملايين.</p>
+                </div>
+
+                <div class="card animate-on-scroll">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">الذكاء الاصطناعي</h3>
+                    <p class="card-text">كيف تعلم الآلة تفكر، تحلل البيانات، وتتوقع شو رح يصير بالمستقبل.</p>
+                </div>
+
+                <div class="card animate-on-scroll">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">في كل المجالات</h3>
+                    <p class="card-text">حتى الدكاترة والمهندسين والمحاسبين بيحتاجوها عشان يسهلوا شغلهم ويحلوا مشاكلهم المعقدة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Concept Section -->
+    <section id="core" class="section core-section">
+        <div class="container">
+            <h2 class="section-title">حل المشكلات (Problem Solving): هون السر!</h2>
+            <p class="section-text">يمكن تفكر إنك تتعلم لغة زي Python أو C++ هو الهدف، بس الحقيقة اللغة هاي مجرد "أداة" زي القلم. الشطارة اللي بتميز المبتدئ عن المحترف هي مهارة حل المشكلات (Problem Solving). بدونها، رح تكون مجرد "كاتب كود" مش "مهندس برمجيات" فاهم الطبخة.</p>
+            
+            <div class="process-steps">
+                <div class="process-step animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">تفكيك المشكلة</h3>
+                    <p class="step-text">كيف تقسم المشكلة الكبيرة لأجزاء صغيرة تقدر عليها.</p>
+                </div>
+                <div class="process-arrow">←</div>
+                <div class="process-step animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">بناء الخوارزمية</h3>
+                    <p class="step-text">ترسم "خطة" الحل بمخك أو على ورقة قبل ما تكتب ولا حرف كود.</p>
+                </div>
+                <div class="process-arrow">←</div>
+                <div class="process-step animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">تحويل الحل لكود</h3>
+                    <p class="step-text">تترجم هالخطة للغة يفهمها الكمبيوتر.</p>
+                </div>
+            </div>
+
+            <div class="bridge-text">
+                <p>وعشان هيك، البرمجة التنافسية هي "الجيم" (Gym) اللي رح تربي فيه عضلات مخك البرمجية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is CP Section -->
+    <section id="what" class="section what-section">
+        <div class="container">
+            <h2 class="section-title">شو يعني برمجة تنافسية؟</h2>
+            
+            <div class="definition-box animate-on-scroll">
+                <div class="definition-icon">🏆</div>
+                <p class="definition-text">رياضة ذهنية.. مبرمجين بتنافسوا مين يحل مشاكل برمجية معقدة بوقت محدد وشروط معينة.</p>
+            </div>
+
+            <h3 class="subsection-title">ليش تهتم؟</h3>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">🎓</div>
+                    <h4>الجامعات والمنح</h4>
+                    <p>مسابقات زي الـ ICPC هي فرصتك عشان تتميز بالجامعة وممكن تطلعلك منح بسببها.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">💼</div>
+                    <h4>شركات الـ FAANG</h4>
+                    <p>حلمك تشتغل بجوجل أو أمازون؟ مقابلاتهم كلها تحتوي على أسئلة Problem Solving عشان يقيسوا ذكاءك، بالتالي مهم يكون عندك هاي المهارة والتفكير المنطقي.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">⚡</div>
+                    <h4>سرعة البديهة</h4>
+                    <p>بتخليك سريع بالتفكير، وكودك نضيف ومرتب.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="section roadmap-section">
+        <div class="container">
+            <h2 class="section-title">خارطة الطريق: كيف تبدأ صح؟</h2>
+            <p class="section-intro">ولا يهمك إذا لسا ما بتعرف إشي، رتبنالك الطريق خطوة بخطوة عشان ما تتوه.</p>
+
+            <div class="roadmap-timeline">
+                <!-- Step 1 -->
+                <div class="roadmap-item animate-on-scroll">
+                    <div class="roadmap-marker">1</div>
+                    <div class="roadmap-content">
+                        <h3 class="roadmap-title">اختار لغتك بناء على اهتماماتك</h3>
+                        <p class="roadmap-text">ما تضيع وقتك بالحيرة! الأهم هو طريقة تفكيرك مش اللغة.</p>
+                        
+                        <div class="language-options">
+                            <div class="language-card">
+                                <h4>C++ (الخيار الأقوى)</h4>
+                                <p>هاي "الملكة" بهالمجال. سريعة كثير وفيها مكتبات تحتوي على أدوات مساعدة بتريحك بالمسابقات، ومفيدة أيضا في مجالات مثل تطوير الألعاب وتصميم الروبوتات.</p>
+                            </div>
+                            <div class="language-card">
+                                <h4>Python</h4>
+                                <p>سهلة وممتازة للمبتدئين، بس مرات بتكون بطيئة شوي بالمسائل الثقيلة، ولكنها خيار المبتدئين الأنسب لأنها الأقرب للغة البشر، وهي أساس بناء نماذج الذكاء الاصطناعي وتدخل في مجالات عديدة مثل تحليل البيانات.</p>
+                            </div>
+                            <div class="language-card">
+                                <h4>Java</h4>
+                                <p>خيار قوي ومتوازن ومطلوب بالسوق (شبيه بـC++).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="roadmap-item animate-on-scroll">
+                    <div class="roadmap-marker">2</div>
+                    <div class="roadmap-content">
+                        <h3 class="roadmap-title">زبّط أساسياتك</h3>
+                        <p class="roadmap-text">قبل ما تفوت بالغميق، لازم تتقن أدواتك بالأول. تعلم هالشغلات منيح:</p>
+                        
+                        <ul class="basics-list">
+                            <li><strong>تثبيت البيئة:</strong> نزل برنامج زي VS Code وبلش عليه، أو ممكن تستعمل مواقع كبداية مثل Programiz.</li>
+                            <li><strong>المفاهيم:</strong> إيش هي الـ Variables، و If conditions، و Loops.</li>
+                            <li><strong>الدوال (Functions):</strong> عشان كودك يكون مرتب وما ينعجق.</li>
+                            <li><strong>المصفوفات (Arrays):</strong> كيف تخزن البيانات وتتعامل معها.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="roadmap-item animate-on-scroll">
+                    <div class="roadmap-marker">3</div>
+                    <div class="roadmap-content">
+                        <h3 class="roadmap-title">التدريب الصح</h3>
+                        <p class="roadmap-text">البرمجة ما بتزبط نظري! لازم تحل بإيدك وتغلط وتتعلم. هاي أهم خطوة.</p>
+                        
+                        <div class="practice-resources">
+                            <div class="resource-box">
+                                <h4>شيتات أسيوط (Assiut Sheets)</h4>
+                                <p>هاي كنز للمبتدئين (موجودة على منصة Codeforces). عبارة عن مسائل مرتبة بتوخذك من "اطبع اسمك" لحد مسائل بدها صفنة.</p>
+                                <a href="https://codeforces.com/group/MWSDmqGsZm/contests" target="_blank" class="resource-link external-link">
+                                    زور شيتات أسيوط
+                                </a>
+                            </div>
+
+                            <h4 class="resources-subtitle">مصادر إضافية للأساسيات</h4>
+                            <p>في كمان منصات عالمية ممتازة عشان ترسيخ الأساسيات وتتعود على الحل أونلاين:</p>
+                            
+                            <div class="platform-links">
+                                <a href="https://www.hackerrank.com/domains/tutorials/30-days-of-code" target="_blank" class="platform-link external-link">
+                                    <strong>HackerRank:</strong> موقع بجنن عشان تثبت أساسيات اللغة اللي اخترتها.
+                                </a>
+                                <a href="https://codeforces.com/problemset" target="_blank" class="platform-link external-link">
+                                    <strong>Codeforces:</strong> بتقدر تحل عليه مسائل سهلة (ابحث بالـ Tag: 800 Difficulty).
+                                </a>
+                                <a href="https://www.codechef.com/" target="_blank" class="platform-link external-link">
+                                    <strong>CodeChef:</strong> ممتاز للمبتدئين، بنصحك تتابع المسابقات الشهرية اللي فيه.
+                                </a>
+                            </div>
+
+                            <div class="tip-box">
+                                <strong>نصيحة:</strong> في شيت أسيوط، بلش بأول شيت، وحل كل مسألة فيه. ما تفشق عن إشي.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="roadmap-item animate-on-scroll">
+                    <div class="roadmap-marker">4</div>
+                    <div class="roadmap-content">
+                        <h3 class="roadmap-title">الغوص العميق في الخوارزميات (The Deep Dive)</h3>
+                        <p class="roadmap-text">هون بتبلش رحلة احتراف حل المشكلات. رح نبلش سوا بخطوات مرتبة ومنطقية بتعلمك كيف تبني خوارزمية (وصفة حل) سريعة وفعالة. ركز على التدريب بعد كل مرحلة، لأنه النظري لحاله ما بيكفي:</p>
+                        
+                        <div class="algo-stages">
+                            <div class="algo-stage">
+                                <h4>4.1 التأسيس وإتقان الأدوات (Implementation)</h4>
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>الكفاءة (Big O Recalculated)</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>مراجعة مفاهيم الوقت والمساحة، ورح تتعلم كيف تحسب الـ Big O لأي كود بتكتبه عشان تعرف هل الحل تبعك سريع ولا بطيء.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.youtube.com/watch?v=D6xkbGLQesk" target="_blank" class="algo-resource-link external-link">شرح Big O - عربي</a>
+                                            <a href="https://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/" target="_blank" class="algo-resource-link external-link">GeeksforGeeks Tutorial</a>
+                                            <a href="https://www.hackerearth.com/practice/basic-programming/complexity-analysis/time-and-space-complexity/tutorial/" target="_blank" class="algo-resource-link external-link">HackerEarth Guide</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>التعامل مع الإدخال والإخراج (I/O)</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>كيف تقرأ كميات ضخمة من البيانات بسرعة، وهذا إشي أساسي بالمسابقات.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://codeforces.com/blog/entry/45835" target="_blank" class="algo-resource-link external-link">Fast I/O في C++</a>
+                                            <a href="https://www.geeksforgeeks.org/fast-io-for-competitive-programming/" target="_blank" class="algo-resource-link external-link">GeeksforGeeks Fast I/O</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>الخوارزميات الجشعة (Greedy Algorithms)</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>هاي تقنية بسيطة بتقول: "خذ أحسن خيار متاح حالياً". رح تتعلم متى بيمشي هالحل، ومتى ممكن يكون خطأ.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.geeksforgeeks.org/greedy-algorithms/" target="_blank" class="algo-resource-link external-link">GeeksforGeeks Greedy</a>
+                                            <a href="https://cp-algorithms.com/greedy/" target="_blank" class="algo-resource-link external-link">CP-Algorithms</a>
+                                            <a href="https://www.hackerearth.com/practice/algorithms/greedy/basics-of-greedy-algorithms/tutorial/" target="_blank" class="algo-resource-link external-link">HackerEarth Tutorial</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="algo-stage">
+                                <h4>4.2 مفاتيح الحلول الأساسية (Search & Sort)</h4>
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>الترتيب (Sorting)</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>رح تتعلم الـ Bubble Sort والـ Selection Sort (فقط للفهم النظري)، ورح تتقن استخدام خوارزميات الـ Library الجاهزة زي الـ Merge Sort والـ Quick Sort.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.geeksforgeeks.org/sorting-algorithms/" target="_blank" class="algo-resource-link external-link">جميع خوارزميات الترتيب</a>
+                                            <a href="https://visualgo.net/en/sorting" target="_blank" class="algo-resource-link external-link">VisuAlgo - تصور مرئي</a>
+                                            <a href="https://www.cplusplus.com/reference/algorithm/sort/" target="_blank" class="algo-resource-link external-link">C++ STL Sort</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>البحث الثنائي (Binary Search)</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>هاد "سلاح سري" بيلزمك كثير، بخليك تلاقي أي إشي بسرعة خرافية إذا كانت البيانات مرتبة. لا تستهين فيه.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.geeksforgeeks.org/binary-search/" target="_blank" class="algo-resource-link external-link">GeeksforGeeks Binary Search</a>
+                                            <a href="https://www.topcoder.com/thrive/articles/Binary%20Search" target="_blank" class="algo-resource-link external-link">TopCoder Tutorial</a>
+                                            <a href="https://codeforces.com/edu/course/2/lesson/6" target="_blank" class="algo-resource-link external-link">Codeforces EDU</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="algo-stage">
+                                <h4>4.3 رياضيات المسابقات (Number Theory)</h4>
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>أساسيات نظرية الأعداد</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>الأرقام الأولية (Prime Numbers)، والقاسم المشترك الأكبر (GCD)، والمضاعف المشترك الأصغر (LCM). هاي أساس حل كثير من مسائل المسابقات.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.geeksforgeeks.org/number-theory-competitive-programming/" target="_blank" class="algo-resource-link external-link">GeeksforGeeks Number Theory</a>
+                                            <a href="https://cp-algorithms.com/algebra/euclid-algorithm.html" target="_blank" class="algo-resource-link external-link">GCD Algorithm</a>
+                                            <a href="https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-1/tutorial/" target="_blank" class="algo-resource-link external-link">HackerEarth Tutorial</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>الحساب الموديلو (Modular Arithmetic)</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>لما تتعامل مع أرقام كبيرة كثير، بتحتاج هاي التقنية عشان تضل أرقامك ضمن المعقول وما يصير "OverFlow" بالكود.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.geeksforgeeks.org/modular-arithmetic/" target="_blank" class="algo-resource-link external-link">GeeksforGeeks Modular Arithmetic</a>
+                                            <a href="https://codeforces.com/blog/entry/72527" target="_blank" class="algo-resource-link external-link">Codeforces Blog</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="algo-stage">
+                                <h4>4.4 هياكل البيانات المتقدمة للمسابقات (DS for CP)</h4>
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>المكدس والطابور (Stack & Queue)</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>رح تتعلم كيف تستخدم هذول الهياكل بذكاء لحل المسائل، متل لما بدك تعمل "تراجع" (Undo) أو ترتب الأدوار.</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.geeksforgeeks.org/stack-data-structure/" target="_blank" class="algo-resource-link external-link">Stack Tutorial</a>
+                                            <a href="https://www.geeksforgeeks.org/queue-data-structure/" target="_blank" class="algo-resource-link external-link">Queue Tutorial</a>
+                                            <a href="https://visualgo.net/en/list" target="_blank" class="algo-resource-link external-link">VisuAlgo - تصور مرئي</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="algo-dropdown">
+                                    <button class="algo-dropdown-trigger">
+                                        <span>الـ Set والـ Map</span>
+                                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </button>
+                                    <div class="algo-dropdown-content">
+                                        <p>أدوات سريعة جداً للمقارنة والبحث والتخزين بكفاءة عالية (زي فهرس مرتب كثير).</p>
+                                        <div class="algo-resources">
+                                            <a href="https://www.geeksforgeeks.org/set-in-cpp-stl/" target="_blank" class="algo-resource-link external-link">C++ STL Set</a>
+                                            <a href="https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/" target="_blank" class="algo-resource-link external-link">C++ STL Map</a>
+                                            <a href="https://usaco.guide/silver/intro-sorted-sets" target="_blank" class="algo-resource-link external-link">USACO Guide</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="roadmap-item animate-on-scroll">
+                    <div class="roadmap-marker">5</div>
+                    <div class="roadmap-content">
+                        <h3 class="roadmap-title">الترسانة المتقدمة (Graphs, Trees, and DP)</h3>
+                        <p class="roadmap-text">أهلاً بك في المستوى اللي بغير طريقة تفكيرك بالبرمجة. هون رح تتعلم كيف تحل أصعب المسائل بخطوات منطقية. هذا هو مفتاحك للذكاء والتحليل العميق:</p>
+                        
+                        <div class="note-box">
+                            <h4>ملاحظة هامة</h4>
+                            <p>هاي المواضيع كلها متقدمة كثير. إذا ما فهمت شو يعني 'Graphs' أو 'DP' هسا، عادي جداً! هذا إشي طبيعي. الفكرة إنك تعرف إنها موجودة وتوصلها بالتدريج، خطوة بخطوة. استمتع بالرحلة!</p>
+                        </div>
+
+                        <div class="advanced-topics">
+                            <div class="topic-group">
+                                <h4>5.1 هياكل البيانات غير الخطية (Non-Linear Data Structures)</h4>
+                                <ul>
+                                    <li>الأشجار (Trees)، خصوصاً Binary Search Tree (BST).</li>
+                                    <li>الرسوم البيانية (Graphs)، وكيف تمثّلها بالكود (Adjacency List/Matrix).</li>
+                                </ul>
+                            </div>
+
+                            <div class="topic-group">
+                                <h4>5.2 خوارزميات البحث في الرسوم (Graph Traversal)</h4>
+                                <ul>
+                                    <li>البحث بالعمق (DFS - Depth First Search).</li>
+                                    <li>البحث بالعرض (BFS - Breadth First Search).</li>
+                                    <li>خوارزمية ديكسترا (Dijkstra's) لإيجاد أقصر مسار.</li>
+                                </ul>
+                            </div>
+
+                            <div class="topic-group">
+                                <h4>5.3 إعادة بناء التفكير (Recursion & DP)</h4>
+                                <ul>
+                                    <li>العودية (Recursion) كطريقة تفكير متقدمة.</li>
+                                    <li>البرمجة الديناميكية (Dynamic Programming - DP)، وهي سر الحلول المعقدة.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="section community-section">
+        <div class="container">
+            <h2 class="section-title">ما تمشي بهالطريق لحالك</h2>
+            <div class="community-content animate-on-scroll">
+                <p class="community-text">الرحلة هاي طويلة وبدها نَفَس. لما تكون وسط ناس زيك بيشجعوك، الموضوع بفرق كثير. نافس صحابك وشوف مين بحل أكثر. استفيد من خبرات غيرك واسأل لما تدقر معك مسألة. اتبني علاقات مع ناس طموحة لبعدين.</p>
+                <a href="https://discord.com/invite/8rH5YQ7" class="cta-button secondary no-external-icon">
+                    انضم لمجتمع Dalil هسا
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <h3 class="footer-logo">
+                        <svg class="footer-logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                        </svg>
+                        <span>دليل</span>
+                    </h3>
+                    <p class="footer-description">دليلك الشامل نحو عالم البرمجة التنافسية. نساعدك في رحلتك من الصفر حتى الاحتراف.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#hero">الرئيسية</a></li>
+                        <li><a href="#roadmap">خارطة الطريق</a></li>
+                        <li><a href="#community">المجتمع</a></li>
+                        <li><a href="#contact">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-credit">
+                    <p style="margin-bottom: 0.75rem;">تصميم وتطوير:</p>
+                    <div class="designer-links">
+                        <a href="https://linkedin.com" target="_blank" class="designer-link no-external-icon">
+                            علي عدنان
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="designer-link no-external-icon">
+                            مراد حثناوي
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة © 2024 دليل</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

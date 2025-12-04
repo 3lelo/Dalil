@@ -1,0 +1,415 @@
+/* ===================================
+   Responsive Styles - Dalil Landing Page
+   =================================== */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    /* Navigation */
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-actions {
+        gap: 0.5rem;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 70px);
+        background: var(--white);
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        gap: 1rem;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+        background: var(--light-gray);
+    }
+
+    .nav-link.active {
+        background: var(--primary);
+        color: var(--white);
+        border-bottom-color: transparent;
+    }
+
+    .nav-link.active::after {
+        display: none;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Container */
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    /* Sections */
+    .section {
+        padding: 3rem 0;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 80vh;
+        padding-top: 100px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .hero-text {
+        font-size: 1rem;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Process Steps */
+    .process-steps {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .process-arrow {
+        transform: rotate(90deg);
+        font-size: 1.5rem;
+    }
+
+    .process-step {
+        max-width: 100%;
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Roadmap Timeline */
+    .roadmap-timeline::before {
+        right: 30px;
+        transform: none;
+    }
+
+    .roadmap-item {
+        flex-direction: row !important;
+        padding-right: 0;
+    }
+
+    .roadmap-item:nth-child(odd) {
+        flex-direction: row !important;
+    }
+
+    .roadmap-marker {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .roadmap-content {
+        flex: 1;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-credit {
+        text-align: right;
+    }
+
+    /* Language Options */
+    .language-options {
+        gap: 1rem;
+    }
+
+    /* Platform Links */
+    .platform-links {
+        gap: 0.75rem;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    /* Typography */
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    /* Container */
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* Navigation */
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 70vh;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-text {
+        font-size: 0.9375rem;
+    }
+
+    .cta-button {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+
+    /* Section */
+    .section {
+        padding: 2.5rem 0;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-intro,
+    .section-text {
+        font-size: 1rem;
+    }
+
+    /* Cards */
+    .card {
+        padding: 1.5rem;
+    }
+
+    .card-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    /* Process Steps */
+    .process-step {
+        padding: 1.5rem;
+    }
+
+    .step-number {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+    }
+
+    /* Definition Box */
+    .definition-box {
+        padding: 2rem 1.5rem;
+    }
+
+    .definition-icon {
+        font-size: 2.5rem;
+    }
+
+    .definition-text {
+        font-size: 1.125rem;
+    }
+
+    /* Benefits */
+    .benefit-card {
+        padding: 1.5rem;
+    }
+
+    .benefit-icon {
+        font-size: 2rem;
+    }
+
+    /* Roadmap */
+    .roadmap-timeline::before {
+        right: 25px;
+    }
+
+    .roadmap-marker {
+        width: 45px;
+        height: 45px;
+        font-size: 1.125rem;
+    }
+
+    .roadmap-content {
+        padding: 1.5rem;
+    }
+
+    .roadmap-title {
+        font-size: 1.25rem;
+    }
+
+    /* Language Cards */
+    .language-card {
+        padding: 1.25rem;
+    }
+
+    .language-card h4 {
+        font-size: 1rem;
+    }
+
+    /* Resource Box */
+    .resource-box {
+        padding: 1.25rem;
+    }
+
+    .resource-link {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9375rem;
+    }
+
+    /* Algorithm Stages */
+    .algo-stage {
+        padding: 1.25rem;
+    }
+
+    /* Note Box */
+    .note-box {
+        padding: 1.5rem;
+    }
+
+    /* Topic Groups */
+    .topic-group {
+        padding: 1.25rem;
+    }
+
+    /* Community */
+    .community-text {
+        font-size: 1.125rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 2rem 0 1rem;
+    }
+
+    .footer-content {
+        gap: 1.5rem;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+    }
+
+    .footer-credit {
+        text-align: center;
+    }
+}
+
+/* Large Screens (1440px and above) */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.75rem;
+    }
+
+    .section-title {
+        font-size: 3rem;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+
+    .hero-content {
+        padding: 2rem 0;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-text {
+        font-size: 0.9375rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .menu-toggle,
+    .cta-button,
+    .footer {
+        display: none;
+    }
+
+    .section {
+        page-break-inside: avoid;
+    }
+
+    body {
+        font-size: 12pt;
+    }
+}
