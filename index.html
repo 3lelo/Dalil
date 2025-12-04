@@ -570,7 +570,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>جميع الحقوق محفوظة © 2025 دليل</p>
+                <p></p>
+                <script>
+                    document.querySelector('.footer-bottom p').textContent = 
+                    `جميع الحقوق محفوظة © ${new Date().getFullYear()} دليل`;
+                </script>
             </div>
         </div>
     </footer>
