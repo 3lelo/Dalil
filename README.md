@@ -274,6 +274,6 @@ For questions or support regarding this landing page template, please reach out 
 
 ---
 
-**Made with ❤️ for the Arabic programming community**
+**Made with ❤️ for the Palestinian programming community**
 
 دليلك نحو عالم البرمجة التنافسية 🎯
