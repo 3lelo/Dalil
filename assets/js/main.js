@@ -426,7 +426,7 @@
         console.log('%cمرحباً بك في دليل 🚀', styles);
         console.log('%cدليلك للبرمجة التنافسية', 'color: #10B981; font-size: 14px;');
     }
-
+    
     /**
      * Setup Netlify Forms
      */
@@ -639,7 +639,7 @@
     }
 
     /**
-     * Handle Netlify Form Submission
+     * Handle Netlify Form Submission - FIXED VERSION
      */
     async function handleNetlifyFormSubmit(e) {
         e.preventDefault();
@@ -692,77 +692,83 @@
         showFormMessage(messageDiv, 'sending', 'جارٍ إرسال رسالتك...');
         
         try {
-            // Create form data
+            // IMPORTANT: For Netlify Forms to work properly, we need to submit the form data
+            // including the form-name field and all form fields
             const formData = new FormData(form);
             
-            // Add timestamp to prevent caching
-            formData.append('_t', Date.now());
+            // Convert FormData to URL-encoded string
+            const encodedData = new URLSearchParams();
+            for (const pair of formData) {
+                encodedData.append(pair[0], pair[1]);
+            }
             
+            // Add the form-name field (required by Netlify)
+            encodedData.append('form-name', 'footer-contact');
+            
+            console.log('Submitting to Netlify with data:', Object.fromEntries(encodedData));
+            
+            // Submit to Netlify's form endpoint
             const response = await fetch('/', {
                 method: 'POST',
-                body: new URLSearchParams(formData),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                }
+                },
+                body: encodedData.toString()
             });
             
-            if (response.ok) {
-                // Success - record submission and update UI
+            console.log('Netlify response status:', response.status, response.statusText);
+            
+            if (response.ok || response.status === 200 || response.status === 302) {
+                // Record the submission for rate limiting
                 recordSubmission();
                 
                 // Show success message
                 showFormMessage(messageDiv, 'success', 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
                 
-                // Reset form
+                // Reset the form
+                form.reset();
+                
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال الرسالة';
+                
+                // Clear any validation errors
+                const inputs = form.querySelectorAll('.form-input, .form-textarea');
+                inputs.forEach(input => input.classList.remove('invalid'));
+                
+                // Clear success message after 5 seconds
                 setTimeout(() => {
-                    form.reset();
-                    
-                    // Remove invalid classes
-                    const inputs = form.querySelectorAll('.form-input, .form-textarea');
-                    inputs.forEach(input => input.classList.remove('invalid'));
-                    
-                    // Reset button
-                    submitBtn.classList.remove('loading');
-                    submitBtn.textContent = 'إرسال الرسالة';
-                    
-                    // Update rate limit status (will show remaining count or rate limit if reached)
-                    setTimeout(updateRateLimitStatus, 100);
-                    
-                    // Clear success message after 4 seconds
-                    setTimeout(() => {
-                        if (messageDiv.classList.contains('success')) {
-                            hideFormMessage(messageDiv);
-                        }
-                    }, 4000);
-                    
-                }, 1500);
+                    hideFormMessage(messageDiv);
+                }, 5000);
+                
+                // Update rate limit status
+                updateRateLimitStatus();
                 
             } else {
-                throw new Error(`Network response error: ${response.status}`);
+                throw new Error(`Netlify responded with status: ${response.status}`);
             }
             
         } catch (error) {
-            console.error('Error submitting form:', error);
+            console.error('Error submitting form to Netlify:', error);
             
             // Show error message
-            showFormMessage(messageDiv, 'error', 
-                error.name === 'AbortError' || error.name === 'TimeoutError' ?
-                'انتهت مهلة الإرسال. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.' :
-                'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+            let errorMessage = 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.';
             
-            // Reset button
-            submitBtn.disabled = false;
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                errorMessage = 'مشكلة في الاتصال بالإنترنت. يرجى التحقق من الاتصال والمحاولة مرة أخرى.';
+            }
+            
+            showFormMessage(messageDiv, 'error', errorMessage);
+            
+            // Reset button state
             submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
             submitBtn.textContent = 'إرسال الرسالة';
-            
-            // Update rate limit status
-            updateRateLimitStatus();
             
             // Clear error message after 5 seconds
             setTimeout(() => {
-                if (messageDiv.classList.contains('error')) {
-                    hideFormMessage(messageDiv);
-                }
+                hideFormMessage(messageDiv);
             }, 5000);
         }
     }
