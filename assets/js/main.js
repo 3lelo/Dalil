@@ -426,7 +426,7 @@
         console.log('%cمرحباً بك في دليل 🚀', styles);
         console.log('%cدليلك للبرمجة التنافسية', 'color: #10B981; font-size: 14px;');
     }
-
+    
     /**
      * Setup Netlify Forms
      */
@@ -446,65 +446,72 @@
             // Setup real-time validation
             setupFormRealTimeValidation(contactForm);
             
-            // Check rate limit on page load
-            checkRateLimitStatus();
+            // Check rate limit status on page load
+            updateRateLimitStatus();
         }
     }
 
     /**
-     * Check and display rate limit status
+     * Rate limiting configuration
      */
-    function checkRateLimitStatus() {
-        const rateLimitData = getRateLimitData();
-        const submitBtn = document.querySelector('.submit-btn');
-        const messageDiv = document.getElementById('footer-form-message');
-        
-        if (!submitBtn || !messageDiv) return;
-        
-        if (isRateLimited()) {
-            const remainingTime = getRemainingCooldown();
-            submitBtn.disabled = true;
-            submitBtn.textContent = `انتظر ${Math.ceil(remainingTime/60)} دقيقة`;
-            showFormMessage(messageDiv, 'error', `لقد تجاوزت الحد المسموح. يرجى الانتظار ${Math.ceil(remainingTime/60)} دقيقة`);
-        } else {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'إرسال الرسالة';
-        }
-    }
+    const RATE_LIMIT_CONFIG = {
+        maxMessages: 3,
+        timeWindow: 10 * 60 * 1000, // 10 minutes in milliseconds
+        localStorageKey: 'dalil_form_submissions'
+    };
 
     /**
      * Get rate limit data from localStorage
      */
     function getRateLimitData() {
-        const data = localStorage.getItem('dalil_form_submissions');
-        return data ? JSON.parse(data) : { submissions: [], lastSubmission: null };
+        try {
+            const data = localStorage.getItem(RATE_LIMIT_CONFIG.localStorageKey);
+            return data ? JSON.parse(data) : { submissions: [] };
+        } catch (error) {
+            console.error('Error reading rate limit data:', error);
+            return { submissions: [] };
+        }
     }
 
     /**
      * Save rate limit data to localStorage
      */
     function saveRateLimitData(data) {
-        localStorage.setItem('dalil_form_submissions', JSON.stringify(data));
+        try {
+            localStorage.setItem(RATE_LIMIT_CONFIG.localStorageKey, JSON.stringify(data));
+        } catch (error) {
+            console.error('Error saving rate limit data:', error);
+        }
     }
 
     /**
-     * Check if user is rate limited
-     * Returns true if they've sent 3 messages in the last 10 minutes
+     * Check if user can submit (hasn't exceeded rate limit)
      */
-    function isRateLimited() {
+    function canSubmitMessage() {
         const data = getRateLimitData();
         const now = Date.now();
-        const tenMinutesAgo = now - (10 * 60 * 1000);
+        const timeWindowStart = now - RATE_LIMIT_CONFIG.timeWindow;
         
-        // Filter submissions from the last 10 minutes
-        const recentSubmissions = data.submissions.filter(time => time > tenMinutesAgo);
+        // Filter submissions within the time window
+        const recentSubmissions = data.submissions.filter(time => time > timeWindowStart);
         
-        // Update stored submissions
+        // Update stored submissions (clean up old ones)
         data.submissions = recentSubmissions;
         saveRateLimitData(data);
         
-        // Check if limit exceeded
-        return recentSubmissions.length >= 3;
+        // Check if limit is reached
+        return recentSubmissions.length < RATE_LIMIT_CONFIG.maxMessages;
+    }
+
+    /**
+     * Get recent submissions count
+     */
+    function getRecentSubmissionsCount() {
+        const data = getRateLimitData();
+        const now = Date.now();
+        const timeWindowStart = now - RATE_LIMIT_CONFIG.timeWindow;
+        
+        return data.submissions.filter(time => time > timeWindowStart).length;
     }
 
     /**
@@ -515,37 +522,124 @@
         const now = Date.now();
         
         data.submissions.push(now);
-        data.lastSubmission = now;
         
-        // Keep only the last 10 submissions to prevent localStorage from growing too large
-        if (data.submissions.length > 10) {
-            data.submissions = data.submissions.slice(-10);
-        }
+        // Keep only recent submissions (last 24 hours max) to prevent localStorage from growing
+        const oneDayAgo = now - (24 * 60 * 60 * 1000);
+        data.submissions = data.submissions.filter(time => time > oneDayAgo);
         
         saveRateLimitData(data);
+        
+        // Immediately update UI after recording
+        setTimeout(updateRateLimitStatus, 100);
     }
 
     /**
-     * Get remaining cooldown time in seconds
+     * Get remaining time until next allowed submission
      */
     function getRemainingCooldown() {
         const data = getRateLimitData();
         const now = Date.now();
-        const tenMinutesAgo = now - (10 * 60 * 1000);
+        const timeWindowStart = now - RATE_LIMIT_CONFIG.timeWindow;
         
-        const recentSubmissions = data.submissions.filter(time => time > tenMinutesAgo);
+        const recentSubmissions = data.submissions.filter(time => time > timeWindowStart);
         
-        if (recentSubmissions.length < 3) return 0;
+        if (recentSubmissions.length < RATE_LIMIT_CONFIG.maxMessages) {
+            return 0; // Can submit now
+        }
         
-        // Find the oldest submission in the last 10 minutes
-        const oldestRecentSubmission = Math.min(...recentSubmissions);
-        const cooldownEnd = oldestRecentSubmission + (10 * 60 * 1000);
+        // Sort submissions ascending (oldest first)
+        recentSubmissions.sort((a, b) => a - b);
+        
+        // Find when the oldest submission in the window will expire
+        const oldestInWindow = recentSubmissions[0];
+        const cooldownEnd = oldestInWindow + RATE_LIMIT_CONFIG.timeWindow;
         
         return Math.max(0, Math.ceil((cooldownEnd - now) / 1000));
     }
 
     /**
-     * Handle Netlify Form Submission
+     * Update button and UI based on rate limit status
+     */
+    function updateRateLimitStatus() {
+        const submitBtn = document.querySelector('.submit-btn');
+        const messageDiv = document.getElementById('footer-form-message');
+        
+        if (!submitBtn || !messageDiv) return;
+        
+        const canSubmit = canSubmitMessage();
+        const recentCount = getRecentSubmissionsCount();
+        const remainingTime = getRemainingCooldown();
+        
+        if (!canSubmit && remainingTime > 0) {
+            // Rate limited - disable button and show countdown
+            submitBtn.disabled = true;
+            const minutes = Math.ceil(remainingTime / 60);
+            submitBtn.textContent = `انتظر ${minutes} دقيقة`;
+            
+            // Show rate limit message
+            showFormMessage(messageDiv, 'rate-limited', 
+                `لقد وصلت للحد المسموح (${RATE_LIMIT_CONFIG.maxMessages} رسائل كل 10 دقائق). ` +
+                `يرجى الانتظار ${minutes} دقيقة`);
+            
+            // Start countdown timer
+            startRateLimitCountdown();
+        } else {
+            // Not rate limited - enable button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'إرسال الرسالة';
+            
+            // Show remaining messages count if any
+            if (recentCount > 0) {
+                const remaining = RATE_LIMIT_CONFIG.maxMessages - recentCount;
+                if (remaining > 0) {
+                    showFormMessage(messageDiv, 'info', 
+                        `يمكنك إرسال ${remaining} رسالة أخرى خلال الـ 10 دقائق القادمة`);
+                    setTimeout(() => hideFormMessage(messageDiv), 3000);
+                }
+            } else {
+                hideFormMessage(messageDiv);
+            }
+        }
+    }
+
+    /**
+     * Start countdown timer for rate limit
+     */
+    function startRateLimitCountdown() {
+        const submitBtn = document.querySelector('.submit-btn');
+        const messageDiv = document.getElementById('footer-form-message');
+        
+        if (!submitBtn || !messageDiv) return;
+        
+        const updateCountdown = () => {
+            const remainingTime = getRemainingCooldown();
+            
+            if (remainingTime <= 0) {
+                // Cooldown expired - re-enable form
+                updateRateLimitStatus();
+                return;
+            }
+            
+            const minutes = Math.ceil(remainingTime / 60);
+            submitBtn.textContent = `انتظر ${minutes} دقيقة`;
+            
+            // Update message
+            if (messageDiv.classList.contains('rate-limited')) {
+                messageDiv.textContent = 
+                    `لقد وصلت للحد المسموح (${RATE_LIMIT_CONFIG.maxMessages} رسائل كل 10 دقائق). ` +
+                    `يرجى الانتظار ${minutes} دقيقة`;
+            }
+            
+            // Schedule next update
+            setTimeout(updateCountdown, 1000);
+        };
+        
+        // Start countdown
+        updateCountdown();
+    }
+
+    /**
+     * Handle Netlify Form Submission - FIXED VERSION
      */
     async function handleNetlifyFormSubmit(e) {
         e.preventDefault();
@@ -554,26 +648,20 @@
         const submitBtn = form.querySelector('.submit-btn');
         const messageDiv = document.getElementById('footer-form-message');
         
-        // Check rate limit
-        if (isRateLimited()) {
+        // Check rate limit BEFORE sending
+        if (!canSubmitMessage()) {
             const remainingTime = getRemainingCooldown();
-            showFormMessage(messageDiv, 'error', `لقد تجاوزت الحد المسموح (3 رسائل كل 10 دقائق). يرجى الانتظار ${Math.ceil(remainingTime/60)} دقيقة`);
+            const minutes = Math.ceil(remainingTime / 60);
+            
+            showFormMessage(messageDiv, 'rate-limited', 
+                `لقد وصلت للحد المسموح (${RATE_LIMIT_CONFIG.maxMessages} رسائل كل 10 دقائق). ` +
+                `يرجى الانتظار ${minutes} دقيقة`);
+            
             submitBtn.disabled = true;
-            submitBtn.textContent = `انتظر ${Math.ceil(remainingTime/60)} دقيقة`;
+            submitBtn.textContent = `انتظر ${minutes} دقيقة`;
             
-            // Update button text every second while waiting
-            const updateInterval = setInterval(() => {
-                const remaining = getRemainingCooldown();
-                if (remaining <= 0) {
-                    clearInterval(updateInterval);
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'إرسال الرسالة';
-                    hideFormMessage(messageDiv);
-                } else {
-                    submitBtn.textContent = `انتظر ${Math.ceil(remaining/60)} دقيقة`;
-                }
-            }, 1000);
-            
+            // Start countdown
+            startRateLimitCountdown();
             return;
         }
         
@@ -604,72 +692,79 @@
         showFormMessage(messageDiv, 'sending', 'جارٍ إرسال رسالتك...');
         
         try {
-            // Create a unique form identifier to prevent duplicate submissions
-            const formIdentifier = `${name}-${email}-${Date.now()}`;
-            form.dataset.submissionId = formIdentifier;
-            
-            // Netlify Forms will handle the submission automatically
+            // IMPORTANT: For Netlify Forms to work properly, we need to submit the form data
+            // including the form-name field and all form fields
             const formData = new FormData(form);
             
-            // Add a timestamp to prevent caching issues
-            formData.append('_timestamp', Date.now());
+            // Convert FormData to URL-encoded string
+            const encodedData = new URLSearchParams();
+            for (const pair of formData) {
+                encodedData.append(pair[0], pair[1]);
+            }
             
+            // Add the form-name field (required by Netlify)
+            encodedData.append('form-name', 'footer-contact');
+            
+            console.log('Submitting to Netlify with data:', Object.fromEntries(encodedData));
+            
+            // Submit to Netlify's form endpoint
             const response = await fetch('/', {
                 method: 'POST',
-                body: new URLSearchParams(formData),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-Form-Submission': formIdentifier
                 },
-                // Add timeout to prevent hanging requests
-                signal: AbortSignal.timeout(30000) // 30 second timeout
+                body: encodedData.toString()
             });
             
-            if (response.ok) {
+            console.log('Netlify response status:', response.status, response.statusText);
+            
+            if (response.ok || response.status === 200 || response.status === 302) {
                 // Record the submission for rate limiting
                 recordSubmission();
                 
                 // Show success message
                 showFormMessage(messageDiv, 'success', 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
                 
-                // Reset form after successful submission
+                // Reset the form
+                form.reset();
+                
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال الرسالة';
+                
+                // Clear any validation errors
+                const inputs = form.querySelectorAll('.form-input, .form-textarea');
+                inputs.forEach(input => input.classList.remove('invalid'));
+                
+                // Clear success message after 5 seconds
                 setTimeout(() => {
-                    form.reset();
-                    
-                    // Clear any invalid classes
-                    const inputs = form.querySelectorAll('.form-input, .form-textarea');
-                    inputs.forEach(input => {
-                        input.classList.remove('invalid');
-                    });
-                    
-                    // Reset submit button
-                    resetSubmitButton(submitBtn);
-                    
-                    // Check rate limit status again
-                    checkRateLimitStatus();
-                    
-                    // Clear success message after 5 seconds
-                    setTimeout(() => {
-                        hideFormMessage(messageDiv);
-                    }, 5000);
-                }, 2000);
+                    hideFormMessage(messageDiv);
+                }, 5000);
+                
+                // Update rate limit status
+                updateRateLimitStatus();
                 
             } else {
-                throw new Error(`Network response was not ok: ${response.status}`);
+                throw new Error(`Netlify responded with status: ${response.status}`);
             }
             
         } catch (error) {
-            console.error('Error submitting form:', error);
+            console.error('Error submitting form to Netlify:', error);
             
-            // Check if it's a timeout error
-            if (error.name === 'TimeoutError' || error.name === 'AbortError') {
-                showFormMessage(messageDiv, 'error', 'انتهت مهلة الإرسال. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.');
-            } else {
-                showFormMessage(messageDiv, 'error', 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+            // Show error message
+            let errorMessage = 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.';
+            
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                errorMessage = 'مشكلة في الاتصال بالإنترنت. يرجى التحقق من الاتصال والمحاولة مرة أخرى.';
             }
             
-            // Reset submit button
-            resetSubmitButton(submitBtn);
+            showFormMessage(messageDiv, 'error', errorMessage);
+            
+            // Reset button state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'إرسال الرسالة';
             
             // Clear error message after 5 seconds
             setTimeout(() => {
@@ -687,7 +782,7 @@
         element.textContent = text;
         
         // Remove all state classes first
-        element.classList.remove('success', 'error', 'sending', 'rate-limited');
+        element.classList.remove('success', 'error', 'sending', 'rate-limited', 'info');
         
         // Add the new state class
         element.classList.add(type);
@@ -705,28 +800,15 @@
     function hideFormMessage(element) {
         if (!element) return;
         
-        // Instead of hiding completely, reset to default state
-        element.classList.remove('success', 'error', 'sending', 'rate-limited');
+        element.classList.remove('success', 'error', 'sending', 'rate-limited', 'info');
         element.style.opacity = '0';
         element.style.maxHeight = '0';
         element.style.padding = '0';
         
-        // Hide completely after transition
         setTimeout(() => {
             element.style.display = 'none';
             element.textContent = '';
         }, 300);
-    }
-
-    /**
-     * Reset submit button
-     */
-    function resetSubmitButton(button) {
-        if (!button) return;
-        
-        button.disabled = false;
-        button.classList.remove('loading');
-        button.textContent = 'إرسال الرسالة';
     }
 
     /**
@@ -789,32 +871,26 @@
     }
 
     /**
-     * Clear rate limit data (for testing or admin purposes)
+     * Initialize rate limit monitoring
      */
-    function clearRateLimitData() {
-        localStorage.removeItem('dalil_form_submissions');
-        console.log('Rate limit data cleared');
-    }
-
-    // Add this to your main init function or call it separately
-    function setupRateLimitMonitor() {
-        // Check rate limit every minute
-        setInterval(() => {
-            checkRateLimitStatus();
-        }, 60000); // 1 minute
+    function setupRateLimitMonitoring() {
+        // Update rate limit status every 30 seconds
+        setInterval(updateRateLimitStatus, 30000);
         
-        // Clear old submissions periodically (once per hour)
+        // Clean up old submissions (older than 24 hours) every hour
         setInterval(() => {
             const data = getRateLimitData();
-            const oneHourAgo = Date.now() - (60 * 60 * 1000);
-            data.submissions = data.submissions.filter(time => time > oneHourAgo);
+            const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
+            data.submissions = data.submissions.filter(time => time > oneDayAgo);
             saveRateLimitData(data);
-        }, 60 * 60 * 1000); // 1 hour
+        }, 60 * 60 * 1000);
     }
 
     // Initialize rate limit monitoring when page loads
     document.addEventListener('DOMContentLoaded', function() {
-        setupRateLimitMonitor();
+        setupRateLimitMonitoring();
+        // Initial update
+        setTimeout(updateRateLimitStatus, 100);
     });
 
     // Initialize when DOM is ready
