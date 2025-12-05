@@ -547,9 +547,39 @@
                     <ul>
                         <li><a href="#hero">الرئيسية</a></li>
                         <li><a href="#roadmap">خارطة الطريق</a></li>
-                        <li><a href="#community">المجتمع</a></li>
-                        <li><a href="#contact">تواصل معنا</a></li>
+                        <li><a href="https://chat.whatsapp.com/LYK94nQM7yE2huBVjhwfBO" class="no-external-icon">المجتمع</a></li>
                     </ul>
+                    
+                    <div class="contact-form-container">
+                        <h4>تواصل معنا</h4>
+                        <form 
+                            id="footer-contact-form" 
+                            class="footer-contact-form"
+                            name="footer-contact"
+                            method="POST"
+                            data-netlify="true"
+                            data-netlify-honeypot="bot-field"
+                            netlify
+                        >
+                            <!-- Netlify Bot Field (hidden) -->
+                            <input type="hidden" name="form-name" value="footer-contact" />
+                            <p class="hidden">
+                                <label>لا تملأ هذا الحقل إذا كنت إنسان: <input name="bot-field" /></label>
+                            </p>
+                            
+                            <div class="form-group">
+                                <input type="text" id="footer-name" name="name" placeholder="اسمك" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="footer-email" name="email" placeholder="بريدك الإلكتروني" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="footer-message" name="message" rows="3" placeholder="رسالتك" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                            <div id="footer-form-message" class="form-message"></div>
+                        </form>
+                    </div>
                 </div>
                 <div class="footer-credit">
                     <h4 style="margin-bottom: 0.75rem; color: #cccccc">تطوير</h4>

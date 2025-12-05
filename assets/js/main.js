@@ -19,6 +19,7 @@
         setupAccessibility();
         setupDarkMode();
         setupAlgorithmDropdowns();
+        setupNetlifyForms();
         logPerformance();
     }
 
@@ -426,6 +427,183 @@
         console.log('%cدليلك للبرمجة التنافسية', 'color: #10B981; font-size: 14px;');
     }
 
+    /**
+     * Setup Netlify Forms
+     */
+    function setupNetlifyForms() {
+        const contactForm = document.getElementById('footer-contact-form');
+        
+        if (contactForm) {
+            // Check if we're on a success page
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('form') === 'footer-contact' && urlParams.get('success') === 'true') {
+                showFormSuccessMessage();
+            }
+            
+            // Handle form submission
+            contactForm.addEventListener('submit', handleNetlifyFormSubmit);
+            
+            // Setup real-time validation
+            setupFormRealTimeValidation(contactForm);
+        }
+    }
+
+    /**
+     * Handle Netlify Form Submission
+     */
+    async function handleNetlifyFormSubmit(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const submitBtn = form.querySelector('.submit-btn');
+        const messageDiv = document.getElementById('footer-form-message');
+        
+        // Get form values for validation
+        const name = form.querySelector('#footer-name').value.trim();
+        const email = form.querySelector('#footer-email').value.trim();
+        const message = form.querySelector('#footer-message').value.trim();
+        
+        // Validation
+        if (!name || !email || !message) {
+            showFormMessage(messageDiv, 'error', 'يرجى ملء جميع الحقول');
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showFormMessage(messageDiv, 'error', 'البريد الإلكتروني غير صالح');
+            return;
+        }
+        
+        // Disable submit button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        submitBtn.textContent = '';
+        
+        // Show sending message
+        showFormMessage(messageDiv, 'sending', 'جارٍ إرسال رسالتك...');
+        
+        try {
+            // Netlify Forms will handle the submission automatically
+            const formData = new FormData(form);
+            
+            const response = await fetch('/', {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(form)),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+            
+            if (response.ok) {
+                // Show success message
+                showFormMessage(messageDiv, 'success', 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
+                
+                // Reset form after successful submission
+                setTimeout(() => {
+                    form.reset();
+                    resetSubmitButton(submitBtn);
+                    
+                    // Clear success message after 5 seconds
+                    setTimeout(() => {
+                        hideFormMessage(messageDiv);
+                    }, 5000);
+                }, 1500);
+            } else {
+                throw new Error('Network response was not ok');
+            }
+            
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            
+            // Show error message
+            showFormMessage(messageDiv, 'error', 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+            
+            // Re-enable submit button
+            resetSubmitButton(submitBtn);
+            
+            // Clear error message after 5 seconds
+            setTimeout(() => {
+                hideFormMessage(messageDiv);
+            }, 5000);
+        }
+    }
+
+    /**
+     * Show form message
+     */
+    function showFormMessage(element, type, text) {
+        element.textContent = text;
+        element.className = 'form-message ' + type;
+        element.style.display = 'block';
+    }
+
+    /**
+     * Hide form message
+     */
+    function hideFormMessage(element) {
+        element.style.display = 'none';
+        element.className = 'form-message';
+    }
+
+    /**
+     * Reset submit button state
+     */
+    function resetSubmitButton(button) {
+        button.disabled = false;
+        button.classList.remove('loading');
+        button.textContent = 'إرسال الرسالة';
+    }
+
+    /**
+     * Show form success message (for redirect pages)
+     */
+    function showFormSuccessMessage() {
+        const formContainer = document.querySelector('.contact-form-container');
+        if (formContainer) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'netlify-form-success';
+            successDiv.innerHTML = `
+                <h3>شكراً لك!</h3>
+                <p>تم استلام رسالتك بنجاح. سنتواصل معك في أقرب وقت ممكن.</p>
+                <p>يمكنك <a href="#" onclick="location.reload(); return false;">إرسال رسالة أخرى</a> إذا أردت.</p>
+            `;
+            
+            const form = document.getElementById('footer-contact-form');
+            if (form) {
+                form.style.display = 'none';
+            }
+            
+            formContainer.appendChild(successDiv);
+        }
+    }
+
+    /**
+     * Setup real-time form validation
+     */
+    function setupFormRealTimeValidation(form) {
+        form.addEventListener('input', function(e) {
+            const input = e.target;
+            const messageDiv = document.getElementById('footer-form-message');
+            
+            // Clear any error messages when user starts typing
+            if (messageDiv.classList.contains('error')) {
+                hideFormMessage(messageDiv);
+            }
+            
+            // Real-time validation for email
+            if (input.type === 'email' && input.value.trim() !== '') {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(input.value)) {
+                    input.classList.add('invalid');
+                } else {
+                    input.classList.remove('invalid');
+                }
+            }
+        });
+    }
+
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
@@ -441,7 +619,9 @@
     window.DalilApp = {
         init,
         validateForm,
-        setupExternalLinks
+        setupExternalLinks,
+        handleNetlifyFormSubmit,
+        showFormMessage 
     };
 })();
 
