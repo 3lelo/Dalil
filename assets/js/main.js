@@ -535,25 +535,54 @@
      */
     function showFormMessage(element, type, text) {
         element.textContent = text;
-        element.className = 'form-message ' + type;
+        
+        // Remove all state classes first
+        element.classList.remove('success', 'error', 'sending');
+        
+        // Add the new state class
+        element.classList.add(type);
+        
+        // Make sure it's visible
         element.style.display = 'block';
+        element.style.opacity = '1';
+        element.style.maxHeight = '100px';
     }
 
     /**
      * Hide form message
      */
     function hideFormMessage(element) {
-        element.style.display = 'none';
-        element.className = 'form-message';
+        // Instead of hiding completely, reset to default state
+        element.classList.remove('success', 'error', 'sending');
+        element.style.opacity = '0';
+        element.style.maxHeight = '0';
+        element.style.padding = '0';
+        
+        // Hide completely after transition
+        setTimeout(() => {
+            element.style.display = 'none';
+            element.textContent = '';
+        }, 300);
     }
 
     /**
-     * Reset submit button state
+     * Reset form to initial state
      */
-    function resetSubmitButton(button) {
-        button.disabled = false;
-        button.classList.remove('loading');
-        button.textContent = 'إرسال الرسالة';
+    function resetForm(form) {
+        form.reset();
+        
+        // Remove any invalid classes
+        const inputs = form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.classList.remove('invalid');
+            input.style.borderColor = '';
+        });
+        
+        // Hide any visible messages
+        const messageDiv = document.getElementById('footer-form-message');
+        if (messageDiv) {
+            hideFormMessage(messageDiv);
+        }
     }
 
     /**

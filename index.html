@@ -564,20 +564,20 @@
                             <!-- Netlify Bot Field (hidden) -->
                             <input type="hidden" name="form-name" value="footer-contact" />
                             <p class="hidden">
-                                <label>لا تملأ هذا الحقل إذا كنت إنسان: <input name="bot-field" /></label>
+                                <label>لا تملأ هذا الحقل إذا كنت إنسان: <input name="bot-field" class="form-input" /></label>
                             </p>
                             
                             <div class="form-group">
-                                <input type="text" id="footer-name" name="name" placeholder="اسمك" required>
+                                <input type="text" id="footer-name" name="name" placeholder="اسمك" required class="form-input">
                             </div>
                             <div class="form-group">
-                                <input type="email" id="footer-email" name="email" placeholder="بريدك الإلكتروني" required>
+                                <input type="email" id="footer-email" name="email" placeholder="بريدك الإلكتروني" required class="form-input">
                             </div>
                             <div class="form-group">
-                                <textarea id="footer-message" name="message" rows="3" placeholder="رسالتك" required></textarea>
+                                <textarea id="footer-message" name="message" rows="3" placeholder="رسالتك" required class="form-textarea no-resize-horizontal"></textarea>
                             </div>
-                            <button type="submit" class="submit-btn">إرسال الرسالة</button>
-                            <div id="footer-form-message" class="form-message"></div>
+                            <button type="submit" class="submit-btn form-submit-btn">إرسال الرسالة</button>
+                            <div id="footer-form-message" class="form-message form-message-default"></div>
                         </form>
                     </div>
                 </div>

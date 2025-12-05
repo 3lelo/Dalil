@@ -152,6 +152,32 @@
         gap: 2rem;
     }
 
+    .contact-form-container {
+        margin-top: 20px;
+    }
+    
+    .form-input,
+    .form-textarea {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .form-textarea {
+        min-height: 80px;
+    }
+    
+    .form-submit-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .form-submit-btn.loading::after {
+        width: 18px;
+        height: 18px;
+        margin-top: -9px;
+        margin-left: -9px;
+    }
+
     .footer-credit {
         text-align: right;
     }
