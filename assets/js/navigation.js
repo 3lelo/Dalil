@@ -196,7 +196,6 @@
 
     // Add additional features
     addScrollProgress();
-    addBackToTop();
     setupSectionHighlight();
 
     // Export navigation functions
