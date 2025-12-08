@@ -251,8 +251,6 @@
      * Setup accessibility features
      */
     function setupAccessibility() {
-        // Add skip to main content link
-        addSkipLink();
 
         // Improve focus visibility
         improveFocusVisibility();
@@ -262,38 +260,6 @@
 
         // Handle keyboard navigation
         setupKeyboardNavigation();
-    }
-
-    /**
-     * Add skip to main content link
-     */
-    function addSkipLink() {
-        const skipLink = document.createElement('a');
-        skipLink.href = '#hero';
-        skipLink.textContent = 'انتقل إلى المحتوى الرئيسي';
-        skipLink.className = 'skip-link';
-        skipLink.style.cssText = `
-            position: absolute;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            z-index: 10000;
-            transition: top 0.3s;
-        `;
-
-        skipLink.addEventListener('focus', () => {
-            skipLink.style.top = '10px';
-        });
-
-        skipLink.addEventListener('blur', () => {
-            skipLink.style.top = '-100px';
-        });
-
-        document.body.insertBefore(skipLink, document.body.firstChild);
     }
 
     /**
