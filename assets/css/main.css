@@ -380,31 +380,60 @@ a {
     animation: float 25s infinite ease-in-out reverse;
 }
 
+/* Floating Code Elements */
+.floating-code {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.code-tag {
+    position: absolute;
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.8rem;
+    opacity: 0.25;
+    user-select: none;
+    pointer-events: none;
+    animation: float-code 20s infinite linear;
+}
+
+.code-tag:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; font-size: 2rem; }
+.code-tag:nth-child(2) { top: 25%; right: 15%; animation-delay: -5s; font-size: 2.5rem; }
+.code-tag:nth-child(3) { top: 40%; left: 20%; animation-delay: -10s; font-size: 1.5rem; }
+.code-tag:nth-child(4) { top: 60%; right: 10%; animation-delay: -2s; font-size: 1.8rem; }
+.code-tag:nth-child(5) { top: 70%; left: 15%; animation-delay: -8s; font-size: 2.2rem; }
+.code-tag:nth-child(6) { top: 20%; left: 75%; animation-delay: -12s; font-size: 1.6rem; }
+.code-tag:nth-child(7) { top: 80%; right: 20%; animation-delay: -6s; font-size: 1.9rem; }
+.code-tag:nth-child(8) { top: 45%; right: 25%; animation-delay: -14s; font-size: 1.4rem; }
+.code-tag:nth-child(9) { top: 30%; left: 60%; animation-delay: -9s; font-size: 1.7rem; }
+.code-tag:nth-child(10) { top: 65%; left: 70%; animation-delay: -3s; font-size: 2.1rem; }
+
+[data-theme="dark"] .code-tag {
+    opacity: 0.1;
+    color: var(--accent);
+}
+
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     max-width: 900px;
 }
 
 .hero-title {
     color: var(--primary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .hero-subtitle {
     font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     color: var(--dark);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     font-weight: 500;
-}
-
-.hero-text {
-    font-size: 1.125rem;
-    color: var(--dark);
-    opacity: 0.8;
-    margin-bottom: 2.5rem;
-    line-height: 1.8;
 }
 
 /* Why Section */
@@ -498,136 +527,204 @@ a {
     color: var(--primary);
 }
 
-/* Form Styles */
-    .hidden {
-        display: none !important;
-        visibility: hidden;
-        opacity: 0;
-        height: 0;
-        width: 0;
-        position: absolute;
-        left: -9999px;
-    }
-
-    .contact-form-container {
-        margin-top: 25px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .contact-form-container h4 {
-        color: #fff;
-        margin-bottom: 15px;
-        font-size: 1.1rem;
-    }
-
-    /* Form Layout */
-    .footer-contact-form {
+    /* Modal Styles - Hide scrollbar */
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1100;
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .form-group {
-        width: 100%;
-    }
-
-    /* Form Inputs */
-    .form-input {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.05);
-        color: #fff;
-        font-family: inherit;
-        font-size: 0.9rem;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        opacity: 0;
+        visibility: hidden;
         transition: all 0.3s ease;
-        box-sizing: border-box;
     }
 
-    .form-input:focus {
-        outline: none;
-        border-color: #4a9eff;
-        background-color: rgba(255, 255, 255, 0.1);
+    .modal.active {
+        opacity: 1;
+        visibility: visible;
     }
 
-    .form-input::placeholder {
-        color: rgba(255, 255, 255, 0.6);
-    }
-
-    /* Textarea Specific */
-    .form-textarea {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.05);
-        color: #fff;
-        font-family: inherit;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
-        resize: vertical;
-        min-height: 100px;
-    }
-
-    /* Prevent Horizontal Resizing */
-    .no-resize-horizontal {
-        max-width: 100%;
-        min-width: 100%;
-        resize: vertical;
-    }
-
-    .form-textarea:focus {
-        outline: none;
-        border-color: #4a9eff;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .form-textarea::placeholder {
-        color: rgba(255, 255, 255, 0.6);
-    }
-
-    /* Submit Button */
-    .form-submit-btn {
-        padding: 10px 20px;
-        background-color: #4a9eff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        font-weight: 500;
+    .modal-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
         cursor: pointer;
-        transition: all 0.3s ease;
-        font-family: inherit;
+    }
+
+    .modal-content {
+        position: relative;
+        background: var(--white);
+        border-radius: 16px;
+        box-shadow: var(--shadow-lg);
         width: 100%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: translateY(-20px);
+        transition: transform 0.3s ease;
+        z-index: 1101;
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        &::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+            background: transparent;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
 
-    .form-submit-btn:hover {
-        background-color: #3a8bef;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .form-submit-btn:active {
+    .modal.active .modal-content {
         transform: translateY(0);
     }
 
-    .form-submit-btn:disabled {
-        background-color: #6a9ed8;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 1.5rem 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+        color: var(--dark);
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+        color: var(--dark);
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+        background: var(--light-gray);
+        color: var(--primary);
+        transform: rotate(90deg);
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    /* Visually hidden class for honeypot field */
+    .visually-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    /* Remove old hidden class styles and replace with visually-hidden */
+    .hidden {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        width: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+
+    /* Contact Form Styles for Modal */
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+    }
+
+    /* Form Inputs for Modal */
+    .form-input,
+    .form-textarea {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--light-gray);
+        color: var(--dark);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        background: var(--white);
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+        /* Prevent horizontal resize */
+        max-width: 100%;
+        min-width: 100%;
+    }
+
+    /* Hide scrollbar for textarea */
+    .form-textarea::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .form-textarea::-webkit-scrollbar-track {
+        background: var(--light-gray);
+        border-radius: 3px;
+    }
+
+    .form-textarea::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+    }
+
+    .form-textarea::-webkit-scrollbar-thumb:hover {
+        background: var(--dark);
+    }
+
+    [data-theme="dark"] .form-textarea::-webkit-scrollbar-track {
+        background: var(--white);
+    }
+
+    [data-theme="dark"] .form-textarea::-webkit-scrollbar-thumb {
+        background: var(--border);
     }
 
     /* Form Messages */
     .form-message-default {
-        padding: 8px 12px;
-        border-radius: 5px;
-        font-size: 0.85rem;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
         text-align: center;
-        margin-top: 5px;
+        margin-top: 0.5rem;
         display: none;
         opacity: 0;
         max-height: 0;
@@ -639,33 +736,80 @@ a {
         display: block;
         opacity: 1;
         max-height: 100px;
-        padding: 12px;
-        background-color: rgba(76, 175, 80, 0.2);
+        background-color: rgba(76, 175, 80, 0.1);
         color: #4caf50;
-        border: 1px solid rgba(76, 175, 80, 0.3);
+        border: 1px solid rgba(76, 175, 80, 0.2);
     }
 
     .form-message-default.error {
         display: block;
         opacity: 1;
         max-height: 100px;
-        padding: 12px;
-        background-color: rgba(244, 67, 54, 0.2);
+        background-color: rgba(244, 67, 54, 0.1);
         color: #f44336;
-        border: 1px solid rgba(244, 67, 54, 0.3);
+        border: 1px solid rgba(244, 67, 54, 0.2);
     }
 
     .form-message-default.sending {
         display: block;
         opacity: 1;
         max-height: 100px;
-        padding: 12px;
-        background-color: rgba(33, 150, 243, 0.2);
-        color: #2196f3;
-        border: 1px solid rgba(33, 150, 243, 0.3);
+        background-color: rgba(33, 150, 243, 0.1);
+        color: var(--primary);
+        border: 1px solid rgba(33, 150, 243, 0.2);
     }
 
-    /* Loading State */
+    .form-message-default.rate-limited {
+        display: block;
+        opacity: 1;
+        max-height: 100px;
+        background-color: rgba(255, 152, 0, 0.1);
+        color: #ff9800;
+        border: 1px solid rgba(255, 152, 0, 0.2);
+    }
+
+    .form-message-default.info {
+        display: block;
+        opacity: 1;
+        max-height: 100px;
+        background-color: rgba(33, 150, 243, 0.1);
+        color: var(--primary);
+        border: 1px solid rgba(33, 150, 243, 0.2);
+    }
+
+    /* Form Submit Button */
+    .form-submit-btn {
+        padding: 1rem;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .form-submit-btn:hover:not(:disabled) {
+        background-color: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .form-submit-btn:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    .form-submit-btn:disabled {
+        background-color: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
     .form-submit-btn.loading {
         position: relative;
         color: transparent;
@@ -699,27 +843,67 @@ a {
         box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1) !important;
     }
 
-    .form-message.rate-limited {
-        background-color: rgba(255, 152, 0, 0.2);
-        color: #ff9800;
-        border: 1px solid rgba(255, 152, 0, 0.3);
+    /* Hide scrollbar for the entire page when modal is open */
+    body.modal-open {
+        overflow: hidden !important;
+        position: fixed;
+        width: 100%;
+        height: 100%;
     }
 
-    .form-message.info {
-        background-color: rgba(33, 150, 243, 0.2);
-        color: #2196f3;
-        border: 1px solid rgba(33, 150, 243, 0.3);
+    /* Dark Mode Styles for Modal */
+    [data-theme="dark"] .modal-content {
+        background: var(--white);
+        color: var(--dark);
     }
 
-    /* Rate limit warning on button */
-    .submit-btn:disabled:not(.loading) {
-        background-color: #ff9800;
-        cursor: not-allowed;
+    [data-theme="dark"] .modal-header {
+        border-bottom-color: var(--border);
     }
 
-    .submit-btn:disabled:not(.loading):hover {
-        transform: none;
-        box-shadow: none;
+    [data-theme="dark"] .form-input,
+    [data-theme="dark"] .form-textarea {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--border);
+        color: var(--dark);
+    }
+
+    [data-theme="dark"] .form-input:focus,
+    [data-theme="dark"] .form-textarea:focus {
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .form-input::placeholder,
+    [data-theme="dark"] .form-textarea::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Custom scrollbar styling for Webkit browsers (optional) */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--light-gray);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--dark);
+    }
+
+    [data-theme="dark"] ::-webkit-scrollbar-track {
+        background: var(--white);
+    }
+
+    [data-theme="dark"] ::-webkit-scrollbar-thumb {
+        background: var(--border);
     }
 
 .footer-credit {

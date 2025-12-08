@@ -178,6 +178,21 @@
     animation: spin 0.4s linear infinite;
 }
 
+@keyframes float-code {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(20px) rotate(-5deg);
+    }
+}
+
 /* Stagger Animation for Lists */
 .stagger-animation > * {
     opacity: 0;
@@ -215,6 +230,18 @@
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* Animation for Modal */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

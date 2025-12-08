@@ -1,21 +1,69 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="دليل - دليلك الشامل للبرمجة التنافسية من الصفر حتى الاحتراف">
+    <meta name="description" content="دليل - دليلك الشامل للبرمجة التنافسية من الصفر حتى الاحتراف. تعلم الخوارزميات، هياكل البيانات، وتقنيات حل المشكلات لتنمية التفكير المنطقي والتفوق في المسابقات البرمجية.">
+    
+    <!-- Title -->
     <title>دليل - البرمجة التنافسية</title>
     
-    <!-- Google Fonts - Cairo -->
+    <!-- Keywords for SEO -->
+    <meta name="keywords" content="البرمجة التنافسية, خوارزميات, هياكل بيانات, مسابقات برمجة, Codeforces, LeetCode, HackerRank, تعلم البرمجة, حل المشكلات, تنمية التفكير المنطقي, هندسة البرمجيات, تحسين الكود, تعلم التقنية, تطوير المهارات البرمجية, أسئلة المقابلات البرمجية, أمثلة برمجية, تعلم بالعربي, برمجة عربي">
+    
+    <!-- Author & Copyright -->
+    <meta name="author" content="مراد حثناوي - Murad Hethnawi">
+    <meta name="copyright" content="دليل - Dalil">
+    <meta name="designer" content="علي عدنان - Ali Adnan">
+    
+    <!-- Robots & SEO -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google" content="nositelinkssearchbox">
+    <meta name="google" content="notranslate">
+    
+    <!-- Open Graph Meta Tags (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:title" content="دليل - البرمجة التنافسية: دليلك لاحتراف التفكير المنطقي والبرمجي">
+    <meta property="og:description" content="تعلم البرمجة التنافسية من الصفر حتى الاحتراف. دليلك الشامل للخوارزميات، هياكل البيانات، وتقنيات حل المشكلات لتطوير مهاراتك البرمجية والتفوق في المسابقات.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dalil4cp.netlify.app/">
+    <meta property="og:image" content="assets/images/icon.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="دليل - البرمجة التنافسية">
+    <meta property="og:site_name" content="دليل - Dalil">
+    <meta property="og:locale" content="ar_SA">
+    <meta property="og:locale:alternate" content="ar_AE">
+    <meta property="og:locale:alternate" content="ar_EG">
+    
+    <!-- Apple & Mobile Meta Tags -->
+    <meta name="apple-mobile-web-app-title" content="دليل">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#2563EB">
+    <meta name="msapplication-TileColor" content="#2563EB">
+    <meta name="application-name" content="دليل">
+    
+    <!-- Alternate Languages (if you have multi-language) -->
+    <link rel="alternate" hreflang="ar" href="https://dalil4cp.netlify.app/">
+    <link rel="alternate" hreflang="en" href="https://dalil.com/en">
+    
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Google Fonts - Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧭</text></svg>">
+    <!-- Favicon & App Icons -->
+    <link rel="icon" href="assets/images/icon.png">
     <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><polygon points='16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76'/></svg>">
     
     <!-- CSS Files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/components.css">
     <link rel="stylesheet" href="assets/css/animations.css">
@@ -61,7 +109,7 @@
                 <li><a href="#what" class="nav-link">البرمجة التنافسية</a></li>
                 <li><a href="#roadmap" class="nav-link">خارطة الطريق</a></li>
                 <li><a href="#community" class="nav-link">المجتمع</a></li>
-                <li><a href="#contact-us" class="nav-link">تواصل معنا</a></li>
+                <li><a href="#contact" class="nav-link contact-trigger">تواصل معنا</a></li>
             </ul>
         </div>
     </nav>
@@ -69,10 +117,24 @@
     <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-background"></div>
+
+        <!-- Floating code elements -->
+        <div class="floating-code">
+            <span class="code-tag">{</span>
+            <span class="code-tag">}</span>
+            <span class="code-tag">< /></span>
+            <span class="code-tag">;</span>
+            <span class="code-tag">( )</span>
+            <span class="code-tag">[ ]</span>
+            <span class="code-tag">#</span>
+            <span class="code-tag">//</span>
+            <span class="code-tag">/* */</span>
+            <span class="code-tag">=></span>
+        </div>
+
         <div class="container hero-content">
             <h1 class="hero-title fade-in-up">البرمجة التنافسية: دليلك لاحتراف المنطق البرمجي</h1>
             <h2 class="hero-subtitle fade-in-up delay-1">جاهز تغير طريقة تفكيرك؟ هاي مش بس لغة برمجة بتتعلمها، هذا "المفتاح" عشان تشغل مخك صح وتلاقي مسارك للنجاح بعالم التقنية.</h2>
-            <p class="hero-text fade-in-up delay-2">تعال معنا برحلة بسيطة وممتعة بعالم البرمجة التنافسية. "دليل" هو بوابتك عشان تبدأ من الصفر عالاخر، لحد ما تبني تفكير مبرمج محترف، خطوة بخطوة وبدون تعقيد.</p>
             <button class="cta-button primary fade-in-up delay-3" onclick="window.location.href='#roadmap'">بلّش رحلتك هسا</button>
         </div>
     </section>
@@ -548,35 +610,51 @@
                         <li><a href="https://chat.whatsapp.com/LYK94nQM7yE2huBVjhwfBO" class="no-external-icon">المجتمع</a></li>
                     </ul>
                     
-                    <div class="contact-form-container", id="contact-us">
-                        <h4>تواصل معنا</h4>
-                        <form 
-                            id="footer-contact-form" 
-                            class="footer-contact-form"
-                            name="footer-contact"
-                            method="POST"
-                            data-netlify="true"
-                            data-netlify-honeypot="bot-field"
-                            netlify
-                        >
-                            <!-- Netlify Bot Field (hidden) -->
-                            <input type="hidden" name="form-name" value="footer-contact" />
-                            <p class="hidden">
-                                <label>لا تملأ هذا الحقل إذا كنت إنسان: <input name="bot-field" class="form-input" /></label>
-                            </p>
+                    <!-- Modal Dialog -->
+                    <div id="contact-modal" class="modal">
+                        <div class="modal-overlay"></div>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">تواصل معنا</h3>
+                                <button class="modal-close" id="modal-close" aria-label="إغلاق">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
                             
-                            <div class="form-group">
-                                <input type="text" id="footer-name" name="name" placeholder="اسمك" required class="form-input">
+                            <div class="modal-body">
+                                <form 
+                                    id="contact-form" 
+                                    class="contact-form"
+                                    name="contact"
+                                    method="POST"
+                                    data-netlify="true"
+                                    data-netlify-honeypot="bot-field"
+                                    netlify
+                                >
+                                    <!-- Netlify Bot Field (hidden) -->
+                                    <input type="hidden" name="form-name" value="contact" />
+                                    <!-- Hidden honeypot field - visually hidden but in DOM -->
+                                    <div class="visually-hidden">
+                                        <label>
+                                            لا تملأ هذا الحقل إذا كنت إنسان: 
+                                            <input name="bot-field" class="form-input" autocomplete="off" tabindex="-1" />
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <input type="text" id="name" name="name" placeholder="اسمك" required class="form-input" autocomplete="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" id="email" name="email" placeholder="بريدك الإلكتروني" required class="form-input" autocomplete="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="message" name="message" rows="4" placeholder="رسالتك" required class="form-textarea no-resize-horizontal" autocomplete="off"></textarea>
+                                    </div>
+                                    <button type="submit" class="submit-btn form-submit-btn">إرسال الرسالة</button>
+                                    <div id="form-message" class="form-message form-message-default"></div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <input type="email" id="footer-email" name="email" placeholder="بريدك الإلكتروني" required class="form-input">
-                            </div>
-                            <div class="form-group">
-                                <textarea id="footer-message" name="message" rows="3" placeholder="رسالتك" required class="form-textarea no-resize-horizontal"></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn form-submit-btn">إرسال الرسالة</button>
-                            <div id="footer-form-message" class="form-message form-message-default"></div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <div class="footer-credit">

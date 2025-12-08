@@ -427,227 +427,109 @@
         console.log('%cدليلك للبرمجة التنافسية', 'color: #10B981; font-size: 14px;');
     }
     
-    /**
-     * Setup Netlify Forms
-     */
-    function setupNetlifyForms() {
-        const contactForm = document.getElementById('footer-contact-form');
+    // Modal Functionality
+    function setupContactModal() {
+        const modal = document.getElementById('contact-modal');
+        const modalOverlay = modal.querySelector('.modal-overlay');
+        const modalClose = document.getElementById('modal-close');
+        const contactTriggers = document.querySelectorAll('.contact-trigger');
+        const form = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
         
-        if (contactForm) {
-            // Check if we're on a success page
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('form') === 'footer-contact' && urlParams.get('success') === 'true') {
-                showFormSuccessMessage();
-            }
-            
-            // Handle form submission
-            contactForm.addEventListener('submit', handleNetlifyFormSubmit);
-            
-            // Setup real-time validation
-            setupFormRealTimeValidation(contactForm);
-            
-            // Check rate limit status on page load
-            updateRateLimitStatus();
-        }
-    }
-
-    /**
-     * Rate limiting configuration
-     */
-    const RATE_LIMIT_CONFIG = {
-        maxMessages: 3,
-        timeWindow: 10 * 60 * 1000, // 10 minutes in milliseconds
-        localStorageKey: 'dalil_form_submissions'
-    };
-
-    /**
-     * Get rate limit data from localStorage
-     */
-    function getRateLimitData() {
-        try {
-            const data = localStorage.getItem(RATE_LIMIT_CONFIG.localStorageKey);
-            return data ? JSON.parse(data) : { submissions: [] };
-        } catch (error) {
-            console.error('Error reading rate limit data:', error);
-            return { submissions: [] };
-        }
-    }
-
-    /**
-     * Save rate limit data to localStorage
-     */
-    function saveRateLimitData(data) {
-        try {
-            localStorage.setItem(RATE_LIMIT_CONFIG.localStorageKey, JSON.stringify(data));
-        } catch (error) {
-            console.error('Error saving rate limit data:', error);
-        }
-    }
-
-    /**
-     * Check if user can submit (hasn't exceeded rate limit)
-     */
-    function canSubmitMessage() {
-        const data = getRateLimitData();
-        const now = Date.now();
-        const timeWindowStart = now - RATE_LIMIT_CONFIG.timeWindow;
-        
-        // Filter submissions within the time window
-        const recentSubmissions = data.submissions.filter(time => time > timeWindowStart);
-        
-        // Update stored submissions (clean up old ones)
-        data.submissions = recentSubmissions;
-        saveRateLimitData(data);
-        
-        // Check if limit is reached
-        return recentSubmissions.length < RATE_LIMIT_CONFIG.maxMessages;
-    }
-
-    /**
-     * Get recent submissions count
-     */
-    function getRecentSubmissionsCount() {
-        const data = getRateLimitData();
-        const now = Date.now();
-        const timeWindowStart = now - RATE_LIMIT_CONFIG.timeWindow;
-        
-        return data.submissions.filter(time => time > timeWindowStart).length;
-    }
-
-    /**
-     * Add a submission timestamp
-     */
-    function recordSubmission() {
-        const data = getRateLimitData();
-        const now = Date.now();
-        
-        data.submissions.push(now);
-        
-        // Keep only recent submissions (last 24 hours max) to prevent localStorage from growing
-        const oneDayAgo = now - (24 * 60 * 60 * 1000);
-        data.submissions = data.submissions.filter(time => time > oneDayAgo);
-        
-        saveRateLimitData(data);
-        
-        // Immediately update UI after recording
-        setTimeout(updateRateLimitStatus, 100);
-    }
-
-    /**
-     * Get remaining time until next allowed submission
-     */
-    function getRemainingCooldown() {
-        const data = getRateLimitData();
-        const now = Date.now();
-        const timeWindowStart = now - RATE_LIMIT_CONFIG.timeWindow;
-        
-        const recentSubmissions = data.submissions.filter(time => time > timeWindowStart);
-        
-        if (recentSubmissions.length < RATE_LIMIT_CONFIG.maxMessages) {
-            return 0; // Can submit now
+        // Function to open modal
+        function openModal() {
+            modal.classList.add('active');
+            // Add class to body to prevent scrolling
+            document.body.classList.add('modal-open');
+            // Focus on first input
+            setTimeout(() => {
+                const firstInput = form.querySelector('input[name="name"]');
+                if (firstInput) firstInput.focus();
+            }, 100);
         }
         
-        // Sort submissions ascending (oldest first)
-        recentSubmissions.sort((a, b) => a - b);
+        // Function to close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            // Remove class from body to re-enable scrolling
+            document.body.classList.remove('modal-open');
+            // Reset form after animation completes
+            setTimeout(resetForm, 300);
+        }
         
-        // Find when the oldest submission in the window will expire
-        const oldestInWindow = recentSubmissions[0];
-        const cooldownEnd = oldestInWindow + RATE_LIMIT_CONFIG.timeWindow;
-        
-        return Math.max(0, Math.ceil((cooldownEnd - now) / 1000));
-    }
-
-    /**
-     * Update button and UI based on rate limit status
-     */
-    function updateRateLimitStatus() {
-        const submitBtn = document.querySelector('.submit-btn');
-        const messageDiv = document.getElementById('footer-form-message');
-        
-        if (!submitBtn || !messageDiv) return;
-        
-        const canSubmit = canSubmitMessage();
-        const recentCount = getRecentSubmissionsCount();
-        const remainingTime = getRemainingCooldown();
-        
-        if (!canSubmit && remainingTime > 0) {
-            // Rate limited - disable button and show countdown
-            submitBtn.disabled = true;
-            const minutes = Math.ceil(remainingTime / 60);
-            submitBtn.textContent = `انتظر ${minutes} دقيقة`;
-            
-            // Show rate limit message
-            showFormMessage(messageDiv, 'rate-limited', 
-                `لقد وصلت للحد المسموح (${RATE_LIMIT_CONFIG.maxMessages} رسائل كل 10 دقائق). ` +
-                `يرجى الانتظار ${minutes} دقيقة`);
-            
-            // Start countdown timer
-            startRateLimitCountdown();
-        } else {
-            // Not rate limited - enable button
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'إرسال الرسالة';
-            
-            // Show remaining messages count if any
-            if (recentCount > 0) {
-                const remaining = RATE_LIMIT_CONFIG.maxMessages - recentCount;
-                if (remaining > 0) {
-                    showFormMessage(messageDiv, 'info', 
-                        `يمكنك إرسال ${remaining} رسالة أخرى خلال الـ 10 دقائق القادمة`);
-                    setTimeout(() => hideFormMessage(messageDiv), 3000);
-                }
-            } else {
-                hideFormMessage(messageDiv);
+        // Function to reset form
+        function resetForm() {
+            if (form) {
+                form.reset();
+                hideFormMessage(formMessage);
+                // Clear validation classes
+                const inputs = form.querySelectorAll('.form-input, .form-textarea');
+                inputs.forEach(input => input.classList.remove('invalid'));
             }
         }
+        
+        // Open modal when clicking contact triggers
+        contactTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal();
+            });
+        });
+        
+        // Close modal when clicking close button
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
+        
+        // Close modal when clicking overlay
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', closeModal);
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+        
+        // Prevent clicks inside modal content from closing modal
+        const modalContent = modal.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        // Prevent form submission from closing modal automatically
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // Don't prevent default - let the Netlify form handler work
+                // The modal will stay open to show success/error messages
+                return true;
+            });
+        }
     }
 
-    /**
-     * Start countdown timer for rate limit
-     */
-    function startRateLimitCountdown() {
-        const submitBtn = document.querySelector('.submit-btn');
-        const messageDiv = document.getElementById('footer-form-message');
-        
-        if (!submitBtn || !messageDiv) return;
-        
-        const updateCountdown = () => {
-            const remainingTime = getRemainingCooldown();
-            
-            if (remainingTime <= 0) {
-                // Cooldown expired - re-enable form
-                updateRateLimitStatus();
-                return;
-            }
-            
-            const minutes = Math.ceil(remainingTime / 60);
-            submitBtn.textContent = `انتظر ${minutes} دقيقة`;
-            
-            // Update message
-            if (messageDiv.classList.contains('rate-limited')) {
-                messageDiv.textContent = 
-                    `لقد وصلت للحد المسموح (${RATE_LIMIT_CONFIG.maxMessages} رسائل كل 10 دقائق). ` +
-                    `يرجى الانتظار ${minutes} دقيقة`;
-            }
-            
-            // Schedule next update
-            setTimeout(updateCountdown, 1000);
-        };
-        
-        // Start countdown
-        updateCountdown();
-    }
-
-    /**
-     * Handle Netlify Form Submission - FIXED VERSION
-     */
+    // Updated handleNetlifyFormSubmit to handle the honeypot field
     async function handleNetlifyFormSubmit(e) {
         e.preventDefault();
         
         const form = e.target;
         const submitBtn = form.querySelector('.submit-btn');
-        const messageDiv = document.getElementById('footer-form-message');
+        const messageDiv = document.getElementById('form-message');
         
+        // Get honeypot field value
+        const botField = form.querySelector('input[name="bot-field"]');
+        if (botField && botField.value.trim() !== '') {
+            // This is likely a bot, silently fail
+            console.log('Bot detected via honeypot');
+            showFormMessage(messageDiv, 'success', 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
+            form.reset();
+            return;
+        }
+        
+        // Rest of your existing form submission code...
         // Check rate limit BEFORE sending
         if (!canSubmitMessage()) {
             const remainingTime = getRemainingCooldown();
@@ -666,9 +548,9 @@
         }
         
         // Get form values for validation
-        const name = form.querySelector('#footer-name').value.trim();
-        const email = form.querySelector('#footer-email').value.trim();
-        const message = form.querySelector('#footer-message').value.trim();
+        const name = form.querySelector('#name').value.trim();
+        const email = form.querySelector('#email').value.trim();
+        const message = form.querySelector('#message').value.trim();
         
         // Validation
         if (!name || !email || !message) {
@@ -692,22 +574,15 @@
         showFormMessage(messageDiv, 'sending', 'جارٍ إرسال رسالتك...');
         
         try {
-            // IMPORTANT: For Netlify Forms to work properly, we need to submit the form data
-            // including the form-name field and all form fields
             const formData = new FormData(form);
-            
-            // Convert FormData to URL-encoded string
             const encodedData = new URLSearchParams();
+            
             for (const pair of formData) {
                 encodedData.append(pair[0], pair[1]);
             }
             
-            // Add the form-name field (required by Netlify)
-            encodedData.append('form-name', 'footer-contact');
+            encodedData.append('form-name', 'contact');
             
-            console.log('Submitting to Netlify with data:', Object.fromEntries(encodedData));
-            
-            // Submit to Netlify's form endpoint
             const response = await fetch('/', {
                 method: 'POST',
                 headers: {
@@ -716,8 +591,6 @@
                 body: encodedData.toString()
             });
             
-            console.log('Netlify response status:', response.status, response.statusText);
-            
             if (response.ok || response.status === 200 || response.status === 302) {
                 // Record the submission for rate limiting
                 recordSubmission();
@@ -725,22 +598,24 @@
                 // Show success message
                 showFormMessage(messageDiv, 'success', 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
                 
-                // Reset the form
-                form.reset();
-                
-                // Reset button state
-                submitBtn.classList.remove('loading');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'إرسال الرسالة';
-                
-                // Clear any validation errors
-                const inputs = form.querySelectorAll('.form-input, .form-textarea');
-                inputs.forEach(input => input.classList.remove('invalid'));
-                
-                // Clear success message after 5 seconds
+                // Reset the form after 3 seconds
                 setTimeout(() => {
-                    hideFormMessage(messageDiv);
-                }, 5000);
+                    form.reset();
+                    
+                    // Reset button state
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'إرسال الرسالة';
+                    
+                    // Clear any validation errors
+                    const inputs = form.querySelectorAll('.form-input, .form-textarea');
+                    inputs.forEach(input => input.classList.remove('invalid'));
+                    
+                    // Hide success message after 2 more seconds
+                    setTimeout(() => {
+                        hideFormMessage(messageDiv);
+                    }, 2000);
+                }, 3000);
                 
                 // Update rate limit status
                 updateRateLimitStatus();
@@ -752,7 +627,6 @@
         } catch (error) {
             console.error('Error submitting form to Netlify:', error);
             
-            // Show error message
             let errorMessage = 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.';
             
             if (error.name === 'TypeError' && error.message.includes('fetch')) {
@@ -773,102 +647,12 @@
         }
     }
 
-    /**
-     * Show form message
-     */
-    function showFormMessage(element, type, text) {
-        if (!element) return;
-        
-        element.textContent = text;
-        
-        // Remove all state classes first
-        element.classList.remove('success', 'error', 'sending', 'rate-limited', 'info');
-        
-        // Add the new state class
-        element.classList.add(type);
-        
-        // Make sure it's visible
-        element.style.display = 'block';
-        element.style.opacity = '1';
-        element.style.maxHeight = '100px';
-        element.style.padding = '12px';
-    }
-
-    /**
-     * Hide form message
-     */
-    function hideFormMessage(element) {
-        if (!element) return;
-        
-        element.classList.remove('success', 'error', 'sending', 'rate-limited', 'info');
-        element.style.opacity = '0';
-        element.style.maxHeight = '0';
-        element.style.padding = '0';
-        
-        setTimeout(() => {
-            element.style.display = 'none';
-            element.textContent = '';
-        }, 300);
-    }
-
-    /**
-     * Show form success message (for redirect pages)
-     */
-    function showFormSuccessMessage() {
-        const formContainer = document.querySelector('.contact-form-container');
-        if (formContainer) {
-            const successDiv = document.createElement('div');
-            successDiv.className = 'netlify-form-success';
-            successDiv.innerHTML = `
-                <h3>شكراً لك!</h3>
-                <p>تم استلام رسالتك بنجاح. سنتواصل معك في أقرب وقت ممكن.</p>
-                <p>يمكنك <a href="#" class="reload-link">إرسال رسالة أخرى</a> إذا أردت.</p>
-            `;
-            
-            const form = document.getElementById('footer-contact-form');
-            if (form) {
-                form.style.display = 'none';
-            }
-            
-            formContainer.appendChild(successDiv);
-            
-            // Add click handler for reload link
-            const reloadLink = successDiv.querySelector('.reload-link');
-            if (reloadLink) {
-                reloadLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    location.reload();
-                });
-            }
-        }
-    }
-
-    /**
-     * Setup real-time form validation
-     */
-    function setupFormRealTimeValidation(form) {
-        form.addEventListener('input', function(e) {
-            const input = e.target;
-            const messageDiv = document.getElementById('footer-form-message');
-            
-            // Clear any error messages when user starts typing
-            if (messageDiv && messageDiv.classList.contains('error')) {
-                hideFormMessage(messageDiv);
-            }
-            
-            // Real-time validation for email
-            if (input.type === 'email' && input.value.trim() !== '') {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(input.value)) {
-                    input.classList.add('invalid');
-                } else {
-                    input.classList.remove('invalid');
-                }
-            } else if (input.classList.contains('invalid')) {
-                input.classList.remove('invalid');
-            }
-        });
-    }
+    // Initialize everything when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        setupContactModal();
+        setupNetlifyForms();
+        setupRateLimitMonitoring();
+    });
 
     /**
      * Initialize rate limit monitoring
