@@ -9,12 +9,12 @@
 
 [[redirects]]
   from = "/README.md"
-  to = "/404.html"
+  to = "/index.html"
   status = 404
 
 [[redirects]]
   from = "/assets/*"
-  to = "/404.html"
+  to = "/index.html"
   status = 404
 
 # Optional: Customize form settings
