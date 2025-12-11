@@ -27,7 +27,8 @@ dalil-landing-page/
 │   │   └── utils.js           # Utility functions and helpers
 │   │
 │   └── images/
-│       └── (add your images here)
+│       ├── icon.png           # The website's favicon
+│       └── og-image.png       # Default Open Graph image
 │
 └── README.md                   # This file
 ```
