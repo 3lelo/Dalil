@@ -1,6 +1,925 @@
 {
   "algorithms": [
     {
+      "id": "big-o",
+      "title": "الكفاءة (Big O Recalculated)",
+      "title_en": "Algorithm Complexity (Big O)",
+      "category": "التأسيس وإتقان الأدوات",
+      "category_en": "Implementation",
+      "difficulty": "مبتدئ",
+      "description": "كيف تقيس سرعة خوارزميتك وتتأكد إنها بتشتغل بكفاءة مع البيانات الكبيرة.",
+      "what": "Big O Notation هو طريقة لوصف أداء الخوارزمية مع زيادة حجم البيانات. بتقدر تحدد إذا خوارزميتك رح تبطيء مع البيانات الكبيرة.\n\n• **O(1)**: وقت ثابت (مثلاً الوصول لعنصر في مصفوفة)\n• **O(n)**: وقت خطي (مثلاً البحث الخطي)\n• **O(n²)**: وقت تربيعي (مثلاً Bubble Sort)\n• **O(log n)**: وقت لوغاريتمي (مثلاً Binary Search)\n• **O(n log n)**: (مثلاً Merge Sort)",
+      "why": "• **تجنب بطء البرنامج**: بتعرف إذا الحل تبعك رح يشتغل مع مليون مدخل ولا لأ\n• **مقارنة الخوارزميات**: بتقارن بين خوارزميات مختلفة وتختار الأفضل\n• **مطلوب في المقابلات**: شركات التكنولوجيا بتسأل عنها دايماً\n• **تفكير منهجي**: بتعلمك تفكر في أداء الكود قبل ما تكتبه",
+      "prerequisites": [
+        "البرمجة الأساسية",
+        "المصفوفات (Arrays)",
+        "الحلقات (Loops)"
+      ],
+      "related": [
+        {
+          "id": "sorting",
+          "title": "خوارزميات الترتيب"
+        },
+        {
+          "id": "binary-search",
+          "title": "البحث الثنائي"
+        }
+      ],
+      "resources": [
+        {
+          "title": "شرح Big O بالعربي - قناة Mr Algorithms",
+          "url": "https://www.youtube.com/watch?v=nrSVRPYy76c",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "Big O Notation Tutorial",
+          "url": "https://www.youtube.com/watch?v=v-lmw1oXL4s",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "مادة تدريبية للـBig O من موقع GFG",
+          "url": "https://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/",
+          "type": "article",
+          "language": "en",
+          "difficulty": "متوسط"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Watermelon",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/4/A"
+        },
+        {
+          "title": "Word Capitalization",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/281/A"
+        },
+        {
+          "title": "Helpful Maths",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/339/A"
+        },
+        {
+          "title": "Registration System",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/4/C"
+        },
+        {
+          "title": "Drinks",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/200/B"
+        },
+        {
+          "title": "Dragons",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/230/A"
+        },
+        {
+          "title": "Game With Sticks",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/451/A"
+        },
+        {
+          "title": "Holiday Of Equality",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/758/A"
+        },
+        {
+          "title": "Kefa and First Steps",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/580/A"
+        }
+      ]
+    },
+    {
+      "id": "fast-io",
+      "title": "التعامل مع الإدخال والإخرج (I/O)",
+      "title_en": "Fast Input/Output",
+      "category": "التأسيس وإتقان الأدوات",
+      "category_en": "Implementation",
+      "difficulty": "مبتدئ",
+      "description": "كيف تقرأ كميات ضخمة من البيانات بسرعة، وهذا إشي أساسي بالمسابقات.",
+      "what": "في المسابقات البرمجية، قراءة البيانات بسرعة (Fast I/O) بتخليك توفر وقت كتير. لما يكون عندك مليون رقم تدخله، الطريقة العادية ممكن تكون بطيئة.\n\n**نصائح استخدام Fast I/O**:\n1. استخدمه فقط عند الحاجة (مثل لقراءة كميات كبيرة)\n2. دائمًا تحقق من حجم البيانات (n) قبل استخدام Fast I/O\n3. في Python، تجنب استخدام input() داخل حلقات كبيرة جداً\n4. في C++، استخدم ios_base::sync_with_stdio(false); cin.tie(NULL);",
+      "why": "• **توفير الوقت**: فرق ثواني ممكن يكون الفرق بين القبول والرفض\n• **ضروري للبيانات الكبيرة**: بدون Fast I/O ممكن الوقت يضيع كلو بالقراءة\n• **مهارة عملية**: بتستخدمها بكل المسابقات\n• **تحسين الأداء**: بتخلي برنامجك أسرع بكتير",
+      "prerequisites": [
+        "أساسيات اللغة البرمجية",
+        "قراءة وكتابة البيانات الأساسية"
+      ],
+      "related": [
+        {
+          "id": "big-o",
+          "title": "الكفاءة (Big O)"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Fast I/O Guide من موقع USACO",
+          "url": "https://usaco.guide/general/fast-io?lang=py",
+          "type": "article",
+          "language": "en",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "Fast I/O في ++C",
+          "url": "https://codeforces.com/blog/entry/45835",
+          "type": "article",
+          "language": "en",
+          "difficulty": "متوسط"
+        },
+        {
+          "title": "مادة تدريبية للـFast I/O من موقع GFG",
+          "url": "https://www.geeksforgeeks.org/fast-io-for-competitive-programming/",
+          "type": "article",
+          "language": "en",
+          "difficulty": "متوسط"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Strange Functions",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/1619/A"
+        },
+        {
+          "title": "Robot Cleaner",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/1623/A"
+        },
+        {
+          "title": "Phoenix and Gold",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/1515/A"
+        },
+        {
+          "title": "Matrix Rotation",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/1772/B"
+        },
+        {
+          "title": "New Year's Problem",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/1741/B"
+        },
+        {
+          "title": "Wonderful Jump",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/1822/B"
+        },
+        {
+          "title": "Rudolf and the Another Competition",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1858/C"
+        },
+        {
+          "title": "The Third Problem",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1744/C"
+        },
+        {
+          "title": "Robot Cleaner Revisit",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1623/D"
+        }
+      ]
+    },
+    {
+      "id": "greedy-algorithms",
+      "title": "الخوارزميات الجشعة",
+      "title_en": "Greedy Algorithms",
+      "category": "التأسيس وإتقان الأدوات",
+      "category_en": "Implementation",
+      "difficulty": "متوسط",
+      "description": "هاي تقنية بسيطة بتقول: 'خذ أحسن خيار متاح حالياً'. رح تتعلم متى بيمشي هالحل، ومتى ممكن يكون خطأ.",
+      "what": "الخوارزميات الجشعة (Greedy Algorithms) هي استراتيجية لحل المشاكل بتختار الحل الأمثل المحلي في كل خطوة، على أمل الوصول للحل الأمثل العام.\n\n**خصائص المسائل المناسبة للجشعة**:\n• **خاصية الخيار الجشع**: الخيار الأمثل المحلي بيقود للحل الأمثل العام\n• **خاصية البناء**: الحل يبنى خطوة بخطوة\n• **عدم التراجع**: ما بنرجع نغير خيارات سابقة\n\n**أمثلة**: ترتيب المهام حسب الموعد النهائي، خوارزمية هافمان للضغط",
+      "why": "• **بسيطة وسهلة الفهم**: فكرتها مباشرة\n• **فعالة في مسائل معينة**: لما تطلع الحل، بيكون سريع جداً\n• **تدريب على التفكير**: بتساعدك تفكر في الخيارات المحلية والعالمية\n• **أساس لخوارزميات متقدمة**: زي Dijkstra و Prim",
+      "prerequisites": [
+        "المصفوفات (Arrays)",
+        "الترتيب (Sorting)",
+        "الهياكل الأساسية للبيانات"
+      ],
+      "related": [
+        {
+          "id": "dynamic-programming",
+          "title": "البرمجة الديناميكية"
+        },
+        {
+          "id": "sorting",
+          "title": "خوارزميات الترتيب"
+        }
+      ],
+      "resources": [
+        {
+          "title": "مادة تدريبية للـGreedy Algorithms من موقع GFG",
+          "url": "https://www.geeksforgeeks.org/greedy-algorithms/",
+          "type": "article",
+          "language": "en",
+          "difficulty": "متوسط"
+        },
+        {
+          "title": "شرح مع أسئلة على Greedy Algorithms من موقع USACO",
+          "url": "https://usaco.guide/bronze/intro-greedy?lang=cpp",
+          "type": "article",
+          "language": "en",
+          "difficulty": "متوسط"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Stones on the Table",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/266/A"
+        },
+        {
+          "title": "HQ9+",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/133/A"
+        },
+        {
+          "title": "Next Round",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/158/A"
+        },
+        {
+          "title": "Queue at the School",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/266/B"
+        },
+        {
+          "title": "Pashmak and Flowers",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/459/B"
+        },
+        {
+          "title": "Little Elephant and Problem",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/205/B"
+        },
+        {
+          "title": "George and Job",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/467/C"
+        },
+        {
+          "title": "Hamburgers",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/371/C"
+        },
+        {
+          "title": "Prime Swaps",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/432/C"
+        }
+      ]
+    },
+    {
+      "id": "stack-queue",
+      "title": "المكدس والطابور",
+      "title_en": "Stack & Queue",
+      "category": "هياكل البيانات المتقدمة للمسابقات",
+      "category_en": "Data Structures for CP",
+      "difficulty": "مبتدئ",
+      "description": "رح تتعلم كيف تستخدم هذول الهياكل بذكاء لحل المسائل، متل لما بدك تعمل 'تراجع' (Undo) أو ترتب الأدوار.",
+      "what": "**المكدس (Stack)**: هيكل بيانات بيعمل بمبدأ LIFO (آخر داخل، أول خارج). زي كومة الصحون، آخر صحن حطيتو هو أول صحن رح تاخدو.\n\n**الطابور (Queue)**: هيكل بيانات بيعمل بمبدأ FIFO (أول داخل، أول خارج). زي طابور الناس، أول واحد وقف هو أول واحد رح يدخل.\n\n**التطبيقات**:\n• **المكدس**: التراجع (Undo)، تقييم التعابير، الـ DFS\n• **الطابور**: جدولة المهام، معالجة الطلبات، الـ BFS",
+      "why": "• **أساسية في البرمجة**: بتستخدمها كل يوم بدون ما تحس\n• **ضرورية للخوارزميات المتقدمة**: زي DFS و BFS\n• **حل مسائل معقدة**: في مسائل كتير ما بتنحل إلا بهذول الهياكل\n• **تحسين الكفاءة**: عمليات الإدخال والحذف بتكون O(1)",
+      "prerequisites": [
+        "المصفوفات (Arrays)",
+        "القوائم المرتبطة (Linked Lists)",
+        "الدوال (Functions)"
+      ],
+      "related": [
+        {
+          "id": "dfs",
+          "title": "البحث بالعمق (DFS)"
+        },
+        {
+          "id": "bfs",
+          "title": "البحث بالعرض (BFS)"
+        }
+      ],
+      "resources": [
+        {
+          "title": "شرح Stack بالعربي من قناة Mega Code",
+          "url": "https://www.youtube.com/watch?v=ShAK8qDyQu",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "شرح Queue بالعربي",
+          "url": "https://www.youtube.com/watch?v=XJsolvCrW0k",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "قائمة شرح Stack بالعربي من قناة Mega Code",
+          "url": "https://www.youtube.com/watch?v=rYMuP7e-8CM",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "مادة تدريبية على الـStack من موقع GFG",
+          "url": "https://www.geeksforgeeks.org/stack-data-structure/",
+          "type": "article",
+          "language": "en",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "مادة تدريبية على الـQueue من موقع GFG",
+          "url": "https://www.geeksforgeeks.org/queue-data-structure/",
+          "type": "article",
+          "language": "en",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "VisuAlgo - تصور مرئي",
+          "url": "https://visualgo.net/en/list",
+          "type": "interactive",
+          "language": "en",
+          "difficulty": "مبتدئ"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Easy Stack Problems",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/107/A"
+        },
+        {
+          "title": "Easy Stack Problems 2",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/108/B"
+        },
+        {
+          "title": "Arrival of the General",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/144/A"
+        },
+        {
+          "title": "Toy Army",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/84/B"
+        },
+        {
+          "title": "Street Parade",
+          "platform": "SPOJ",
+          "difficulty": "متوسط",
+          "url": "https://www.spoj.com/problems/STPAR/"
+        },
+        {
+          "title": "Mountain Scenery",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/249/A"
+        },
+        {
+          "title": "Devu and Partitioning of the Array",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/439/C"
+        },
+        {
+          "title": "Devu and his Brother",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/439/B"
+        },
+        {
+          "title": "The Child and Toy",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/438/B"
+        },
+        {
+          "title": "Queue at the School",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/266/B"
+        },
+        {
+          "title": "Hit the Lottery",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/996/A"
+        },
+        {
+          "title": "Helpful Maths",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/339/A"
+        },
+        {
+          "title": "Police Recruits",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/427/B"
+        },
+        {
+          "title": "Fire Again",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/35/B"
+        },
+        {
+          "title": "Given Length and Sum of Digits...",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/489/C"
+        },
+        {
+          "title": "Queue",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/490/B"
+        },
+        {
+          "title": "The Child and Toy",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/438/B"
+        },
+        {
+          "title": "The Third Problem",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1744/C"
+        }
+      ]
+    },
+    {
+      "id": "linked-list",
+      "title": "القائمة المترابطة",
+      "title_en": "Linked List",
+      "category": "هياكل البيانات المتقدمة للمسابقات",
+      "category_en": "Data Structures for CP",
+      "difficulty": "متوسط",
+      "description": "هيكل بيانات ديناميكي حيث كل عنصر (عقدة) يحتفظ بالبيانات ومؤشر إلى العنصر التالي.",
+      "what": "القائمة المترابطة (Linked List) هي هيكل بيانات خطي يتكون من عقد (nodes)، كل عقدة تحتوي على:\n• **البيانات (Data)**: القيمة المخزنة\n• **المؤشر (Pointer/Reference)**: عنوان العقدة التالية\n\n**أنواع القوائم المترابطة**:\n• **Singly Linked List**: كل عقدة تشير للتي تليها فقط\n• **Doubly Linked List**: كل عقدة تشير للتي تليها والتي تسبقها\n• **Circular Linked List**: آخر عقدة تشير للأولى\n\n**المزايا**:\n• إدراج وحذف سريع O(1)\n• ديناميكية الحجم\n• **العيوب**:\n• بحث بطيء O(n)\n• استخدام ذاكرة أكبر",
+      "why": "• **أساس هياكل البيانات**: فهمها ضروري لفهم هياكل أخرى\n• **تنفيذ هياكل متقدمة**: Stacks, Queues, Hash Tables\n• **تدريب على المؤشرات**: بتقوي فهمك للمؤشرات والذاكرة\n• **تطبيقات عملية**: مستخدمة في أنظمة الملفات، ذاكرة التخزين المؤقت",
+      "prerequisites": [
+        "المؤشرات (Pointers/References)",
+        "الهياكل (Structs/Classes)",
+        "تخصيص الذاكرة الديناميكي"
+      ],
+      "related": [
+        {
+          "id": "stack-queue",
+          "title": "المكدس والطابور"
+        },
+        {
+          "id": "trees",
+          "title": "الأشجار"
+        }
+      ],
+      "resources": [
+        {
+          "title": "شرح Linked List بالعربي",
+          "url": "https://www.youtube.com/watch?v=ajdwLAMuvyE",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "متوسط"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Insert a Node at the Head",
+          "platform": "HackerRank",
+          "difficulty": "سهل",
+          "url": "https://www.hackerrank.com/challenges/insert-a-node-at-the-head-of-a-linked-list/problem"
+        },
+        {
+          "title": "Print the Elements",
+          "platform": "HackerRank",
+          "difficulty": "سهل",
+          "url": "https://www.hackerrank.com/challenges/print-the-element-s-of-a-linked-list/problem"
+        },
+        {
+          "title": "Compare two linked lists",
+          "platform": "HackerRank",
+          "difficulty": "سهل",
+          "url": "https://www.hackerrank.com/challenges/compare-two-linked-lists/problem"
+        },
+        {
+          "title": "Merge Two Sorted Lists",
+          "platform": "LeetCode",
+          "difficulty": "متوسط",
+          "url": "https://leetcode.com/problems/merge-two-sorted-lists/"
+        },
+        {
+          "title": "Remove Nth Node From End of List",
+          "platform": "LeetCode",
+          "difficulty": "متوسط",
+          "url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/"
+        },
+        {
+          "title": "Reverse Linked List",
+          "platform": "LeetCode",
+          "difficulty": "متوسط",
+          "url": "https://leetcode.com/problems/reverse-linked-list/"
+        },
+        {
+          "title": "Linked List Cycle",
+          "platform": "LeetCode",
+          "difficulty": "صعب",
+          "url": "https://leetcode.com/problems/linked-list-cycle/"
+        },
+        {
+          "title": "Flatten a Multilevel Doubly Linked List",
+          "platform": "LeetCode",
+          "difficulty": "صعب",
+          "url": "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/"
+        },
+        {
+          "title": "Copy List with Random Pointer",
+          "platform": "LeetCode",
+          "difficulty": "صعب",
+          "url": "https://leetcode.com/problems/copy-list-with-random-pointer/description/"
+        }
+      ]
+    },
+    {
+      "id": "binary-search",
+      "title": "البحث الثنائي",
+      "title_en": "Binary Search",
+      "category": "البحث والترتيب",
+      "category_en": "Search & Sort",
+      "difficulty": "مبتدئ - متوسط",
+      "description": "هاد 'سلاح سري' بيلزمك كثير، بخليك تلاقي أي إشي بسرعة خرافية إذا كانت البيانات مرتبة. لا تستهين فيه.",
+      "what": "البحث الثنائي هو خوارزمية بحث فعالة جداً بتشتغل على المصفوفات المرتبة. بدل ما تدور على كل عنصر واحد واحد (O(n))، البحث الثنائي بيقسم المصفوفة لنصين ويختار النص الصحيح، وهيك بتوصل للنتيجة بسرعة O(log n).\n\n**مثال بسيط**: لو بدك تدور على رقم بكتاب تليفونات (مرتب أبجدياً)، مش رح تبدأ من الصفحة الأولى! رح تفتح النص، وتشوف إذا الاسم قبل أو بعد، وتكمل بالنص اللي فيه الاسم. هاي فكرة Binary Search!",
+      "why": "• **سرعة خيالية**: بدل ما تفحص مليون عنصر، بتفحص بس 20 عنصر!\n• **موجودة بكل مكان**: STL في C++ عندها دوال جاهزة\n• **أساس مواضيع متقدمة**: Binary Search on Answer, Ternary Search\n• **سهلة نسبياً**: من أسهل الخوارزميات القوية",
+      "prerequisites": [
+        "Arrays (المصفوفات)",
+        "Sorting (الترتيب الأساسي)",
+        "While Loops"
+      ],
+      "related": [
+        {
+          "id": "sorting",
+          "title": "خوارزميات الترتيب"
+        },
+        {
+          "id": "two-pointers",
+          "title": "Two Pointers Technique"
+        }
+      ],
+      "resources": [
+        {
+          "title": "شرح Binary Search بالعربي",
+          "url": "https://www.youtube.com/watch?v=T2sFYY-fT5o",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "GeeksforGeeks Binary Search",
+          "url": "https://www.geeksforgeeks.org/binary-search/",
+          "type": "article",
+          "language": "en",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "Codeforces EDU - Binary Search",
+          "url": "https://codeforces.com/edu/course/2/lesson/6",
+          "type": "interactive",
+          "language": "en",
+          "difficulty": "متوسط"
+        },
+        {
+          "title": "شرح Binary Search عربي",
+          "url": "https://www.youtube.com/watch?v=dsoY0RO3pxA",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "مبتدئ"
+        },
+        {
+          "title": "شرح Binary Search - قناة أخرى",
+          "url": "https://www.youtube.com/watch?v=JD8DwwJsxxw",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "متوسط"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Binary Search",
+          "platform": "Codeforces",
+          "difficulty": "800",
+          "url": "https://codeforces.com/edu/course/2/lesson/6/1/practice"
+        },
+        {
+          "title": "Search Insert Position",
+          "platform": "LeetCode",
+          "difficulty": "سهل",
+          "url": "https://leetcode.com/problems/search-insert-position/"
+        },
+        {
+          "title": "Interesting drink",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/706/B"
+        },
+        {
+          "title": "K-th Not Divisible by n",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/1352/C"
+        },
+        {
+          "title": "Sagheer and Nubian Market",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/812/C"
+        },
+        {
+          "title": "Hamburgers",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/371/C"
+        },
+        {
+          "title": "Epic Transformation",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/1181/B"
+        },
+        {
+          "title": "Guessing the Greatest",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/1486/C2"
+        },
+        {
+          "title": "Applejack and Storages",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1304/C"
+        },
+        {
+          "title": "Increasing Subsequence",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1157/C2"
+        },
+        {
+          "title": "Exam",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/148/E"
+        }
+      ]
+    },
+    {
+      "id": "sorting",
+      "title": "الترتيب (Sorting)",
+      "title_en": "Sorting Algorithms",
+      "category": "البحث والترتيب",
+      "category_en": "Search & Sort",
+      "difficulty": "مبتدئ",
+      "description": "رح تتعلم الـ Bubble Sort والـ Selection Sort (فقط للفهم النظري)، ورح تتقن استخدام خوارزميات الـ Library الجاهزة زي الـ Merge Sort والـ Quick Sort.",
+      "what": "خوارزميات الترتيب (Sorting Algorithms) بتعيد ترتيب العناصر في قائمة أو مصفوفة حسب قيمة معينة (تصاعدياً أو تنازلياً).\n\n**أنواع خوارزميات الترتيب**:\n• **Bubble Sort**: بسيطة لكن بطيئة (O(n²))\n• **Selection Sort**: بسيطة لكن بطيئة (O(n²))\n• **Insertion Sort**: جيدة للبيانات الصغيرة\n• **Merge Sort**: سريعة (O(n log n))، تستخدم Divide and Conquer\n• **Quick Sort**: الأسرع عملياً (O(n log n)) في المتوسط\n• **Heap Sort**: (O(n log n))، تستخدم Heap Data Structure",
+      "why": "• **أساسية في البرمجة**: معظم البرامج تحتاج ترتيب بيانات\n• **تحسين البحث**: البحث في البيانات المرتبة أسرع (مثل Binary Search)\n• **فهم الخوارزميات**: ترتيب البداية لفهم تصاميم الخوارزميات\n• **مطلوبة في المقابلات**: شركات كتير بتسأل عن خوارزميات الترتيب",
+      "prerequisites": [
+        "المصفوفات (Arrays)",
+        "الحلقات (Loops)",
+        "الدوال (Functions)"
+      ],
+      "related": [
+        {
+          "id": "binary-search",
+          "title": "البحث الثنائي"
+        },
+        {
+          "id": "trees",
+          "title": "الأشجار"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Quick Sort Tutorial",
+          "url": "https://www.youtube.com/watch?v=Hoixqm4-P4M",
+          "type": "video",
+          "language": "en",
+          "difficulty": "متوسط"
+        },
+        {
+          "title": "Merge Sort Tutorial",
+          "url": "https://www.youtube.com/watch?v=NK-Z7syJzP4",
+          "type": "video",
+          "language": "en",
+          "difficulty": "متوسط"
+        },
+        {
+          "title": "Merge Sort Tutorial - Arabic",
+          "url": "https://www.youtube.com/watch?v=sh3ax9qOmY8",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "متوسط"
+        },
+        {
+          "title": "جميع خوارزميات الترتيب",
+          "url": "https://www.geeksforgeeks.org/sorting-algorithms/",
+          "type": "article",
+          "language": "en",
+          "difficulty": "متوسط"
+        },
+        {
+          "title": "VisuAlgo - تصور مرئي",
+          "url": "https://visualgo.net/en/sorting",
+          "type": "interactive",
+          "language": "en",
+          "difficulty": "مبتدئ"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Snake Procession",
+          "platform": "HackerEarth",
+          "difficulty": "سهل",
+          "url": "https://www.hackerearth.com/practice/algorithms/sorting/quick-sort/practice-problems/algorithm/snake-b0112afa/"
+        },
+        {
+          "title": "Lex Finds Beauty",
+          "platform": "HackerEarth",
+          "difficulty": "متوسط",
+          "url": "https://www.hackerearth.com/practice/algorithms/sorting/quick-sort/practice-problems/algorithm/lex-finds-beauty-0d0bc1b6/"
+        },
+        {
+          "title": "Noor and His Pond",
+          "platform": "HackerEarth",
+          "difficulty": "متوسط",
+          "url": "https://www.hackerearth.com/practice/algorithms/sorting/quick-sort/practice-problems/algorithm/noor-and-his-pond-760eabe0/"
+        },
+        {
+          "title": "Kth Largest Element in an Array",
+          "platform": "LeetCode",
+          "difficulty": "متوسط",
+          "url": "https://leetcode.com/problems/kth-largest-element-in-an-array/description/"
+        },
+        {
+          "title": "Kth Smallest Element in a Sorted Matrix",
+          "platform": "LeetCode",
+          "difficulty": "متوسط",
+          "url": "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/"
+        },
+        {
+          "title": "Top K Frequent Elements",
+          "platform": "LeetCode",
+          "difficulty": "صعب",
+          "url": "https://leetcode.com/problems/top-k-frequent-elements/"
+        },
+        {
+          "title": "Merge Two Sorted Arrays",
+          "platform": "GeeksforGeeks",
+          "difficulty": "سهل",
+          "url": "https://www.geeksforgeeks.org/problems/merge-two-sorted-arrays-1587115620/1"
+        },
+        {
+          "title": "Sort List",
+          "platform": "LeetCode",
+          "difficulty": "متوسط",
+          "url": "https://leetcode.com/problems/sort-list/description"
+        },
+        {
+          "title": "Count of Smaller Numbers After Self",
+          "platform": "LeetCode",
+          "difficulty": "صعب",
+          "url": "https://leetcode.com/problems/count-of-smaller-numbers-after-self"
+        }
+      ]
+    },
+    {
+      "id": "recursion",
+      "title": "العودية والتراجع",
+      "title_en": "Recursion & Backtracking",
+      "category": "إعادة بناء التفكير",
+      "category_en": "Recursion & DP",
+      "difficulty": "متوسط",
+      "description": "العودية (Recursion) كطريقة تفكير متقدمة. حل المشكلة بحلها لمشاكل أصغر من نفس النوع.",
+      "what": "العودية (Recursion) هي طريقة في البرمجة بتكون فيها الدالة تستدعي نفسها. الفكرة: تقسم المشكلة الكبيرة لمشاكل أصغر من نفس النوع.\n\n**مكونات الدالة العودية**:\n• **حالة الأساس (Base Case)**: الحالة البسيطة اللي بتنحل مباشرة\n• **خطوة العودية (Recursive Step)**: تحويل المشكلة لمشكلة أصغر\n\n**التراجع (Backtracking)**: تقنية بتستخدم العودية لتجربة كل الحلول الممكنة، وترجع للخلف إذا وصلت لطريق مسدود.\n\n**أمثلة كلاسيكية**:\n• Factorial\n• Fibonacci\n• Tower of Hanoi\n• DFS في الرسوم البيانية\n• Merge Sort",
+      "why": "• **تفكير رياضي**: بتعلمك تفكر رياضياً في حل المشاكل\n• **تبسيط المشاكل**: مشاكل معقدة بتحول لبرنامج بسيط\n• **أساس للخوارزميات**: كتير من الخوارزميات المتقدمة عودية\n• **حل المسائل المركبة**: Backtracking لحل المسائل اللي فيها عدة خيارات",
+      "prerequisites": [
+        "الدوال (Functions)",
+        "الهياكل الأساسية للبيانات",
+        "التفكير الرياضي"
+      ],
+      "related": [
+        {
+          "id": "dynamic-programming",
+          "title": "البرمجة الديناميكية"
+        },
+        {
+          "id": "dfs",
+          "title": "البحث بالعمق"
+        },
+        {
+          "id": "sorting",
+          "title": "الترتيب"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Recursion Playlist - Arabic",
+          "url": "https://www.youtube.com/playlist?list=PLR5x_RGTMNNXHdQp1EorhZq-t3TOWCNis",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "متوسط"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Lucky Division",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/121/A"
+        },
+        {
+          "title": "Game 23",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/1141/A"
+        },
+        {
+          "title": "Recursive Queries",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/932/B"
+        },
+        {
+          "title": "Regular Bridge",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/550/A"
+        },
+        {
+          "title": "Garland",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/368/A"
+        },
+        {
+          "title": "Buying Shovels",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/1360/D"
+        },
+        {
+          "title": "Preparing for Merge Sort",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/154/C"
+        },
+        {
+          "title": "Maximum Diameter Graph",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1108/F"
+        },
+        {
+          "title": "Stars Drawing",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1515/E"
+        }
+      ]
+    },
+    {
       "id": "number-theory",
       "title": "أساسيات نظرية الأعداد",
       "title_en": "Number Theory Basics",
@@ -70,65 +989,277 @@
       ]
     },
     {
-      "id": "binary-search",
-      "title": "البحث الثنائي",
-      "title_en": "Binary Search",
-      "category": "البحث والترتيب",
-      "category_en": "Search & Sort",
-      "difficulty": "مبتدئ - متوسط",
-      "description": "هاد 'سلاح سري' بيلزمك كثير، بخليك تلاقي أي إشي بسرعة خرافية إذا كانت البيانات مرتبة. لا تستهين فيه.",
-      "what": "البحث الثنائي هو خوارزمية بحث فعالة جداً بتشتغل على المصفوفات المرتبة. بدل ما تدور على كل عنصر واحد واحد (O(n))، البحث الثنائي بيقسم المصفوفة لنصين ويختار النص الصحيح، وهيك بتوصل للنتيجة بسرعة O(log n).\n\n**مثال بسيط**: لو بدك تدور على رقم بكتاب تليفونات (مرتب أبجدياً)، مش رح تبدأ من الصفحة الأولى! رح تفتح النص، وتشوف إذا الاسم قبل أو بعد، وتكمل بالنص اللي فيه الاسم. هاي فكرة Binary Search!",
-      "why": "• **سرعة خيالية**: بدل ما تفحص مليون عنصر، بتفحص بس 20 عنصر!\n• **موجودة بكل مكان**: STL في C++ عندها دوال جاهزة\n• **أساس مواضيع متقدمة**: Binary Search on Answer, Ternary Search\n• **سهلة نسبياً**: من أسهل الخوارزميات القوية",
+      "id": "trees",
+      "title": "الأشجار",
+      "title_en": "Trees",
+      "category": "الهياكل غير الخطية",
+      "category_en": "Non-Linear Data Structures",
+      "difficulty": "متوسط",
+      "description": "الأشجار (Trees)، خصوصاً Binary Search Tree (BST). هياكل بيانات هرمية بتستخدم في مجالات كتيرة.",
+      "what": "الشجرة (Tree) هي هيكل بيانات غير خطي مكون من عقد (nodes) متصلة بحيث ما يكون فيها دورات (cycles).\n\n**أنواع الأشجار**:\n• **Binary Tree**: كل عقدة عندها على الأكثر ولدين\n• **Binary Search Tree (BST)**: شجرة ثنائية مرتبة، كل قيم اليسار أقل من العقدة وكل قيم اليمين أكبر\n• **AVL Tree**: BST متوازنة\n• **Segment Tree**: للاستعلامات على نطاقات\n• **Fenwick Tree**: للعمليات التراكمية\n\n**التطبيقات**:\n• تخزين البيانات الهرمية (مثل نظام الملفات)\n• قواعد البيانات\n• ضغط البيانات\n• البحث (BST)",
+      "why": "• **تنظيم البيانات الهرمية**: كثير من البيانات بالحياة عبارة عن هرميات\n• **سرعة العمليات**: البحث في BST بيكون O(log n)\n• **أساس هياكل متقدمة**: زي Heaps و Segment Trees\n• **مطلوبة في المقابلات**: شركات كتير بتسأل عن الأشجار",
       "prerequisites": [
-        "Arrays (المصفوفات)",
-        "Sorting (الترتيب الأساسي)",
-        "While Loops"
+        "القوائم المرتبطة (Linked Lists)",
+        "الدوال (Functions)",
+        "العودية (Recursion)"
       ],
       "related": [
         {
-          "id": "sorting",
-          "title": "خوارزميات الترتيب"
+          "id": "graphs",
+          "title": "الرسوم البيانية"
         },
         {
-          "id": "two-pointers",
-          "title": "Two Pointers Technique"
+          "id": "set-map",
+          "title": "الـ Set والـ Map"
         }
       ],
       "resources": [
         {
-          "title": "شرح Binary Search بالعربي",
-          "url": "https://www.youtube.com/watch?v=T2sFYY-fT5o",
+          "title": "Trees Tutorial - Arabic",
+          "url": "https://www.youtube.com/watch?v=AK2sVlo2yfs",
           "type": "video",
           "language": "ar",
-          "difficulty": "مبتدئ"
-        },
-        {
-          "title": "GeeksforGeeks Binary Search",
-          "url": "https://www.geeksforgeeks.org/binary-search/",
-          "type": "article",
-          "language": "en",
-          "difficulty": "مبتدئ"
-        },
-        {
-          "title": "Codeforces EDU - Binary Search",
-          "url": "https://codeforces.com/edu/course/2/lesson/6",
-          "type": "interactive",
-          "language": "en",
           "difficulty": "متوسط"
         }
       ],
       "problems": [
         {
-          "title": "Binary Search",
+          "title": "White-Black Balanced Subtrees",
           "platform": "Codeforces",
-          "difficulty": "800",
-          "url": "https://codeforces.com/edu/course/2/lesson/6/1/practice"
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/1676/G"
         },
         {
-          "title": "Search Insert Position",
-          "platform": "LeetCode",
+          "title": "Tree Diameter",
+          "platform": "Codeforces",
           "difficulty": "سهل",
-          "url": "https://leetcode.com/problems/search-insert-position/"
+          "url": "https://codeforces.com/problemset/problem/2126/D"
+        },
+        {
+          "title": "Tree Construction",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/2107/D"
+        },
+        {
+          "title": "Tree Traversal",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/2127/D"
+        },
+        {
+          "title": "Tree Query",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/2112/E"
+        },
+        {
+          "title": "Tree Counting",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/2070/D"
+        },
+        {
+          "title": "Tree Construction Hard",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/2138/C2"
+        },
+        {
+          "title": "Tree Balancing",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/2097/B"
+        },
+        {
+          "title": "Tree Optimization",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/2071/E"
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "الرسوم البيانية",
+      "title_en": "Graphs",
+      "category": "الهياكل غير الخطية",
+      "category_en": "Non-Linear Data Structures",
+      "difficulty": "متوسط",
+      "description": "الرسوم البيانية (Graphs)، وكيف تمثّلها بالكود (Adjacency List/Matrix).",
+      "what": "الرسم البياني (Graph) هو مجموعة من العقد (vertices/nodes) متصلة بحواف (edges).\n\n**أنواع الرسوم البيانية**:\n• **غير موجه (Undirected)**: الحواف بدون اتجاه\n• **موجه (Directed)**: الحواف لها اتجاه\n• **مرجح (Weighted)**: كل حافة لها وزن\n• **غير مرجح (Unweighted)**: كل الحواف وزنها 1\n\n**طرق التمثيل**:\n• **قوائم الجوار (Adjacency List)**: الأفضل في معظم الحالات\n• **مصفوفة الجوار (Adjacency Matrix)**: للرسوم الكثيفة (كثير حواف)\n• **قائمة الحواف (Edge List)**: لبعض الخوارزميات مثل Kruskal",
+      "why": "• **نمذجة المشاكل الواقعية**: كثير من المشاكل ممكن تتحول لـ Graph Problem\n• **أساس في الشبكات**: الإنترنت، الشبكات الاجتماعية كلها رسوم بيانية\n• **خوارزميات مهمة**: زي أقصر مسار، أشجار الامتداد\n• **مجالات متعددة**: الذكاء الاصطناعي، قواعد البيانات، الشبكات",
+      "prerequisites": [
+        "المصفوفات (Arrays)",
+        "القوائم المرتبطة (Linked Lists)",
+        "الهياكل الأساسية للبيانات"
+      ],
+      "related": [
+        {
+          "id": "trees",
+          "title": "الأشجار"
+        },
+        {
+          "id": "dfs",
+          "title": "البحث بالعمق"
+        },
+        {
+          "id": "bfs",
+          "title": "البحث بالعرض"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Graphs Tutorial - Arabic",
+          "url": "https://www.youtube.com/watch?v=viG8UTUTSuY",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "متوسط"
+        }
+      ],
+      "problems": [
+        {
+          "title": "New Year Transportation",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/500/A"
+        },
+        {
+          "title": "Anton and Polyhedrons",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/785/A"
+        },
+        {
+          "title": "Giant",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/721/A"
+        },
+        {
+          "title": "Cyclic Components",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/977/E"
+        },
+        {
+          "title": "Painting Pebbles",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/289/B"
+        },
+        {
+          "title": "Level Generation",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/1203/F1"
+        },
+        {
+          "title": "Colorful Graph",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/246/D"
+        },
+        {
+          "title": "Ehab and the Expected GCD Problem",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1174/E"
+        },
+        {
+          "title": "Edge Groups",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/1686/E"
+        }
+      ]
+    },
+    {
+      "id": "dynamic-programming",
+      "title": "البرمجة الديناميكية",
+      "title_en": "Dynamic Programming",
+      "category": "إعادة بناء التفكير",
+      "category_en": "Recursion & DP",
+      "difficulty": "متقدم",
+      "description": "البرمجة الديناميكية (Dynamic Programming - DP)، وهي سر الحلول المعقدة.",
+      "what": "البرمجة الديناميكية (DP) هي طريقة لحل المشاكل بتقسمها لمشاكل فرعية أصغر وتحل كل مشكلة فرعية مرة واحدة فقط.\n\n**خصائص مسائل DP**:\n• **البنية الفرعية المثلى (Optimal Substructure)**: الحل الأمثل للمشكلة من الحلول الأمثل للمشاكل الفرعية\n• **المشاكل الفرعية المتداخلة (Overlapping Subproblems)**: نفس المشاكل الفرعية بتتكرر\n\n**أنواع DP**:\n• **Tabulation (Bottom-Up)**: البناء من الأسفل للأعلى\n• **Memoization (Top-Down)**: من الأعلى للأسفل مع حفظ النتائج\n\n**أمثلة كلاسيكية**:\n• Fibonacci\n• Knapsack\n• Longest Common Subsequence\n• Matrix Chain Multiplication",
+      "why": "• **حل المشاكل المعقدة**: مشاكل ما بتنحل بطرق أخرى\n• **تحسين الأداء**: من أسيوي لعددي في بعض الحالات\n• **مهارة مطلوبة**: في المقابلات والمسابقات\n• **تفكير تحليلي**: بتطور مهارات تحليل المشاكل",
+      "prerequisites": [
+        "العودية (Recursion)",
+        "المصفوفات (Arrays)",
+        "الهياكل الأساسية للبيانات"
+      ],
+      "related": [
+        {
+          "id": "recursion",
+          "title": "العودية"
+        },
+        {
+          "id": "greedy-algorithms",
+          "title": "الخوارزميات الجشعة"
+        },
+        {
+          "id": "graphs",
+          "title": "الرسوم البيانية"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Dynamic Programming Tutorial - Arabic",
+          "url": "https://www.youtube.com/watch?v=6QlRuXL5mqM",
+          "type": "video",
+          "language": "ar",
+          "difficulty": "متقدم"
+        }
+      ],
+      "problems": [
+        {
+          "title": "Number of Ways",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/466/C"
+        },
+        {
+          "title": "Caesar's Legions",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/118/D"
+        },
+        {
+          "title": "Tree Cutting",
+          "platform": "Codeforces",
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/431/C"
+        },
+        {
+          "title": "Flowers",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/474/D"
+        },
+        {
+          "title": "Books",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/279/B"
+        },
+        {
+          "title": "Increase the Constructed Numbers",
+          "platform": "Codeforces",
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/466/B"
+        },
+        {
+          "title": "Ciel and Gondolas",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/321/E"
+        },
+        {
+          "title": "Boredom",
+          "platform": "Codeforces",
+          "difficulty": "صعب",
+          "url": "https://codeforces.com/problemset/problem/455/A"
         }
       ]
     }

@@ -18,7 +18,6 @@
         setupLazyLoading();
         setupAccessibility();
         setupDarkMode();
-        setupAlgorithmDropdowns();
         setupNetlifyForms();
         logPerformance();
     }
@@ -42,29 +41,6 @@
                 localStorage.setItem('theme', newTheme);
             });
         }
-    }
-
-    /**
-     * Setup algorithm dropdowns
-     */
-    function setupAlgorithmDropdowns() {
-        const dropdownTriggers = document.querySelectorAll('.algo-dropdown-trigger');
-
-        dropdownTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const dropdown = this.parentElement;
-                dropdown.classList.toggle('active');
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.algo-dropdown')) {
-                document.querySelectorAll('.algo-dropdown').forEach(d => {
-                    d.classList.remove('active');
-                });
-            }
-        });
     }
 
 

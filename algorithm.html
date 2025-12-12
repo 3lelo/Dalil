@@ -182,8 +182,7 @@
                 <div class="footer-links">
                     <h4>روابط سريعة</h4>
                     <ul>
-                        <li><a href="#hero">الرئيسية</a></li>
-                        <li><a href="#roadmap">خارطة الطريق</a></li>
+                        <li><a href="index.html">الرئيسية</a></li>
                         <li><a href="https://chat.whatsapp.com/LYK94nQM7yE2huBVjhwfBO" class="no-external-icon">المجتمع</a></li>
                     </ul>
                     
@@ -263,23 +262,9 @@
     </footer>
 
     <!-- JavaScript Files -->
+    <script src="assets/js/main.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/algorithm.js"></script>
     <script src="assets/js/back-to-top.js"></script>
-    <script>
-        // Dark mode toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                const theme = document.documentElement.getAttribute('data-theme');
-                const newTheme = theme === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
-        }
-    </script>
 </body>
 </html>

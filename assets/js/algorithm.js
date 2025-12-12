@@ -18,91 +18,76 @@
      * Get difficulty info (icon, class, color)
      */
     function getDifficultyInfo(difficulty) {
-        const difficultyMap = {
-            // Arabic difficulties
-            'مبتدئ': { 
-                icon: '🟢', 
-                className: 'difficulty-beginner',
-                text: 'مبتدئ'
-            },
-            'سهل': { 
-                icon: '🟢', 
-                className: 'difficulty-easy',
-                text: 'سهل'
-            },
-            'متوسط': { 
-                icon: '🟠', 
-                className: 'difficulty-intermediate',
-                text: 'متوسط'
-            },
-            'متقدم': { 
-                icon: '🔴', 
-                className: 'difficulty-advanced',
-                text: 'متقدم'
-            },
+        // Quick return for falsy values
+        if (!difficulty) {
+            return { icon: '⚪', className: 'difficulty-intermediate', text: 'غير معروف' };
+        }
+        
+        const normalized = String(difficulty).trim();
+        const lowerNormalized = normalized.toLowerCase();
+        
+        // Single lookup table with direct resolution
+        const DIFFICULTY_LOOKUP = {
+            // Direct matches
+            'مبتدئ': ['🟢', 'difficulty-beginner', 'مبتدئ'],
+            'سهل': ['🟢', 'difficulty-easy', 'سهل'],
+            'متوسط': ['🟠', 'difficulty-intermediate', 'متوسط'],
+            'متقدم': ['🔴', 'difficulty-advanced', 'متقدم'],
+            'صعب': ['🔴', 'difficulty-hard', 'صعب'],
+            'مبتدئ - متوسط': ['🟡', 'difficulty-intermediate', 'مبتدئ - متوسط'],
             
-            // English difficulties
-            'beginner': { 
-                icon: '🟢', 
-                className: 'difficulty-beginner',
-                text: 'مبتدئ'
-            },
-            'easy': { 
-                icon: '🟢', 
-                className: 'difficulty-easy',
-                text: 'سهل'
-            },
-            'intermediate': { 
-                icon: '🟠', 
-                className: 'difficulty-intermediate',
-                text: 'متوسط'
-            },
-            'medium': { 
-                icon: '🟠', 
-                className: 'difficulty-medium',
-                text: 'متوسط'
-            },
-            'advanced': { 
-                icon: '🔴', 
-                className: 'difficulty-advanced',
-                text: 'متقدم'
-            },
-            'hard': { 
-                icon: '🔴', 
-                className: 'difficulty-hard',
-                text: 'صعب'
-            },
-            
-            // Range difficulties (like "مبتدئ - متوسط")
-            'مبتدئ - متوسط': { 
-                icon: '🟡', 
-                className: 'difficulty-intermediate',
-                text: 'مبتدئ - متوسط'
-            }
+            // Aliases
+            'beginner': 'مبتدئ',
+            'easy': 'سهل',
+            'intermediate': 'متوسط',
+            'medium': 'متوسط',
+            'advanced': 'متقدم',
+            'hard': 'صعب',
+            'easy - medium': 'متوسط',
+            'beginner - intermediate': 'مبتدئ - متوسط'
         };
         
-        // Check for exact match first
-        if (difficultyMap[difficulty]) {
-            return difficultyMap[difficulty];
+        // 1. Direct match
+        let match = DIFFICULTY_LOOKUP[normalized] || DIFFICULTY_LOOKUP[lowerNormalized];
+        
+        // 2. Handle aliases
+        if (typeof match === 'string') {
+            match = DIFFICULTY_LOOKUP[match];
         }
         
-        // Check if difficulty contains certain keywords
-        const lowerDifficulty = difficulty.toLowerCase();
-        if (lowerDifficulty.includes('مبتدئ') || lowerDifficulty.includes('beginner') || lowerDifficulty.includes('easy')) {
-            return difficultyMap['مبتدئ'];
-        }
-        if (lowerDifficulty.includes('متوسط') || lowerDifficulty.includes('intermediate') || lowerDifficulty.includes('medium')) {
-            return difficultyMap['متوسط'];
-        }
-        if (lowerDifficulty.includes('متقدم') || lowerDifficulty.includes('advanced') || lowerDifficulty.includes('hard')) {
-            return difficultyMap['متقدم'];
+        if (match) {
+            return { icon: match[0], className: match[1], text: match[2] };
         }
         
-        // Default to intermediate
+        // 3. Fast keyword detection using includes (faster than regex for simple checks)
+        if (lowerNormalized.includes('مبتدئ') || 
+            lowerNormalized.includes('beginner') || 
+            lowerNormalized.includes('easy') || 
+            lowerNormalized.includes('سهل')) {
+            const match = DIFFICULTY_LOOKUP['مبتدئ'];
+            return { icon: match[0], className: match[1], text: match[2] };
+        }
+        
+        if (lowerNormalized.includes('متوسط') || 
+            lowerNormalized.includes('intermediate') || 
+            lowerNormalized.includes('medium')) {
+            const match = DIFFICULTY_LOOKUP['متوسط'];
+            return { icon: match[0], className: match[1], text: match[2] };
+        }
+        
+        if (lowerNormalized.includes('متقدم') || 
+            lowerNormalized.includes('advanced') || 
+            lowerNormalized.includes('hard') || 
+            lowerNormalized.includes('صعب')) {
+            const match = DIFFICULTY_LOOKUP['متقدم'];
+            return { icon: match[0], className: match[1], text: match[2] };
+        }
+        
+        // 4. Default
         return { 
             icon: '⚪', 
-            className: 'difficulty-intermediate',
-            text: difficulty
+            className: 'difficulty-intermediate', 
+            text: normalized 
         };
     }
 

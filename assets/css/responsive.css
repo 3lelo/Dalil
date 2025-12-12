@@ -146,6 +146,19 @@
         flex: 1;
     }
 
+        .algo-button {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .competitions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tips-box {
+        padding: 1rem;
+    }
+
     /* Footer */
     .footer-content {
         grid-template-columns: 1fr;
