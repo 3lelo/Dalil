@@ -9,10 +9,12 @@ A modern, responsive, and visually stunning landing page for Dalil - a comprehen
 ## 📁 Project Structure
 
 ```
-dalil-landing-page/
+Dalil/
 │
 ├── index.html                  # Main HTML file with complete page structure
-│
+├── 404.html                    # Custom 404 page for not-found errors
+├── netlify.toml                # Configuration for Netlify deployment
+|
 ├── assets/
 │   ├── css/
 │   │   ├── main.css           # Core styles, variables, and base layouts
@@ -24,7 +26,8 @@ dalil-landing-page/
 │   │   ├── main.js            # Main application logic and initialization
 │   │   ├── animations.js      # Scroll animations and visual effects
 │   │   ├── navigation.js      # Navigation menu and scroll handling
-│   │   └── utils.js           # Utility functions and helpers
+│   │   ├── utils.js           # Utility functions and helpers
+│   │   └── back-to-top.js     # Back to Top button functionality
 │   │
 │   └── images/
 │       ├── icon.png           # The website's favicon

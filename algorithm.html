@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تعلم الخوارزميات والبرمجة التنافسية مع دليل">
+    <title id="page-title">الخوارزميات | دليل</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="الخوارزميات | دليل" id="og-title">
+    <meta property="og:description" content="تعلم الخوارزميات والبرمجة التنافسية مع دليل" id="og-description">
+    <meta property="og:type" content="article">
+    
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧭</text></svg>">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/algorithm.css">
+</head>
+<body>
+    <!-- Loading State -->
+    <div id="loading-state" class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>جارٍ التحميل...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="error-state" class="error-container" style="display: none;">
+        <div class="error-icon">⚠️</div>
+        <h2>الخوارزمية غير موجودة</h2>
+        <p>عذراً، الخوارزمية التي تبحث عنها غير موجودة أو تم نقلها.</p>
+        <a href="index.html#roadmap" class="cta-button primary">العودة لخارطة الطريق</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                </svg>
+                <span>دليل</span>
+            </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Algorithm Content -->
+    <main id="algorithm-content" class="algorithm-page" style="display: none;">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-container">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="index.html">الرئيسية</a>
+                    <span class="breadcrumb-separator">←</span>
+                    <a href="index.html#roadmap">خارطة الطريق</a>
+                    <span class="breadcrumb-separator">←</span>
+                    <span id="breadcrumb-category">الخوارزميات</span>
+                    <span class="breadcrumb-separator">←</span>
+                    <span id="breadcrumb-title" class="breadcrumb-current">...</span>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="algo-hero">
+            <div class="container">
+                <div class="algo-hero-content">
+                    <span id="algo-category" class="algo-category-badge">...</span>
+                    <h1 id="algo-title" class="algo-title">...</h1>
+                    <p id="algo-description" class="algo-description">...</p>
+                    <div class="algo-meta">
+                        <span class="meta-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                            <span id="algo-difficulty">...</span>
+                        </span>
+                        <span class="meta-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            <span id="algo-duration">...</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="algo-main-content">
+            <div class="container">
+                <div class="content-grid">
+                    <!-- Main Column -->
+                    <div class="main-column">
+                        <!-- What is it? -->
+                        <div class="content-card" id="what-section">
+                            <h2 class="section-title">شو هاد الموضوع؟</h2>
+                            <div id="algo-what" class="content-text"></div>
+                        </div>
+
+                        <!-- Why Learn It? -->
+                        <div class="content-card" id="why-section">
+                            <h2 class="section-title">ليش لازم تتعلمه؟</h2>
+                            <div id="algo-why" class="content-text"></div>
+                        </div>
+
+                        <!-- Learning Resources -->
+                        <div class="content-card">
+                            <h2 class="section-title">📚 مصادر التعلم</h2>
+                            <div id="algo-resources" class="resources-list"></div>
+                        </div>
+
+                        <!-- Practice Problems -->
+                        <div class="content-card" id="problems-section">
+                            <h2 class="section-title">💪 مسائل للتدريب</h2>
+                            <div id="algo-problems" class="problems-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <!-- Quick Links -->
+                        <div class="sidebar-card">
+                            <h3 class="sidebar-title">روابط سريعة</h3>
+                            <ul class="quick-links">
+                                <li><a href="#what-section">شو هاد الموضوع؟</a></li>
+                                <li><a href="#why-section">ليش تتعلمه؟</a></li>
+                                <li><a href="#problems-section">مسائل التدريب</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Prerequisites -->
+                        <div class="sidebar-card" id="prerequisites-card" style="display: none;">
+                            <h3 class="sidebar-title">المتطلبات المسبقة</h3>
+                            <ul id="algo-prerequisites" class="prerequisites-list"></ul>
+                        </div>
+
+                        <!-- Related Topics -->
+                        <div class="sidebar-card" id="related-card" style="display: none;">
+                            <h3 class="sidebar-title">مواضيع ذات صلة</h3>
+                            <ul id="algo-related" class="related-list"></ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="algo-cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <h2>جاهز تبدأ التدريب؟</h2>
+                    <p>ارجع لخارطة الطريق وكمّل رحلتك بالبرمجة التنافسية</p>
+                    <a href="index.html#roadmap" class="cta-button primary">خارطة الطريق</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <h3 class="footer-logo">
+                        <svg class="footer-logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                        </svg>
+                        <span>دليل</span>
+                    </h3>
+                    <p class="footer-description">دليلك الشامل نحو عالم البرمجة التنافسية.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="index.html#roadmap">خارطة الطريق</a></li>
+                        <li><a href="index.html#community">المجتمع</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة © <span id="current-year"></span> دليل</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/algorithm.js"></script>
+    <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const theme = document.documentElement.getAttribute('data-theme');
+                const newTheme = theme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        }
+    </script>
+</body>
+</html>
