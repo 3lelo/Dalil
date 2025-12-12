@@ -14,12 +14,14 @@ Dalil/
 ├── index.html                  # Main HTML file with complete page structure
 ├── 404.html                    # Custom 404 page for not-found errors
 ├── netlify.toml                # Configuration for Netlify deployment
+├── algoorithm.html             # Algorithm page
 |
 ├── assets/
 │   ├── css/
 │   │   ├── main.css           # Core styles, variables, and base layouts
 │   │   ├── components.css     # Component-specific styles (cards, buttons, etc.)
 │   │   ├── animations.css     # Animation definitions and keyframes
+│   │   ├── algorithm.css      # Algorithm page styles
 │   │   └── responsive.css     # Media queries for mobile/tablet/desktop
 │   │
 │   ├── js/
@@ -27,11 +29,15 @@ Dalil/
 │   │   ├── animations.js      # Scroll animations and visual effects
 │   │   ├── navigation.js      # Navigation menu and scroll handling
 │   │   ├── utils.js           # Utility functions and helpers
+│   │   ├── algorithm.js       # Algorithm page functionality
 │   │   └── back-to-top.js     # Back to Top button functionality
 │   │
-│   └── images/
-│       ├── icon.png           # The website's favicon
-│       └── og-image.png       # Default Open Graph image
+│   ├── images/
+│   │   ├── icon.png           # The website's favicon
+│   │   └── og-image.png       # Default Open Graph image
+│   │
+│   └── data/
+│       └── algorithms.json     # Algorithms data in JSON format
 │
 └── README.md                   # This file
 ```

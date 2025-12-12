@@ -143,6 +143,115 @@
     flex-shrink: 0;
 }
 
+/* Difficulty Color Classes */
+.difficulty-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.difficulty-icon {
+    font-size: 1.1rem;
+}
+
+/* Difficulty Color Classes */
+.difficulty-beginner {
+    background: rgba(76, 175, 80, 0.15);
+    color: #2E7D32;
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.difficulty-beginner .difficulty-icon {
+    color: #4CAF50;
+}
+
+.difficulty-intermediate {
+    background: rgba(255, 152, 0, 0.15);
+    color: #EF6C00;
+    border-color: rgba(255, 152, 0, 0.3);
+}
+
+.difficulty-intermediate .difficulty-icon {
+    color: #FF9800;
+}
+
+.difficulty-advanced {
+    background: rgba(244, 67, 54, 0.15);
+    color: #C62828;
+    border-color: rgba(244, 67, 54, 0.3);
+}
+
+.difficulty-advanced .difficulty-icon {
+    color: #F44336;
+}
+
+.difficulty-easy {
+    background: rgba(76, 175, 80, 0.15);
+    color: #2E7D32;
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.difficulty-easy .difficulty-icon {
+    color: #4CAF50;
+}
+
+.difficulty-medium {
+    background: rgba(255, 152, 0, 0.15);
+    color: #EF6C00;
+    border-color: rgba(255, 152, 0, 0.3);
+}
+
+.difficulty-medium .difficulty-icon {
+    color: #FF9800;
+}
+
+.difficulty-hard {
+    background: rgba(244, 67, 54, 0.15);
+    color: #C62828;
+    border-color: rgba(244, 67, 54, 0.3);
+}
+
+.difficulty-hard .difficulty-icon {
+    color: #F44336;
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .difficulty-beginner {
+    background: rgba(76, 175, 80, 0.2);
+    color: #81C784;
+}
+
+[data-theme="dark"] .difficulty-intermediate {
+    background: rgba(255, 152, 0, 0.2);
+    color: #FFB74D;
+}
+
+[data-theme="dark"] .difficulty-advanced {
+    background: rgba(244, 67, 54, 0.2);
+    color: #E57373;
+}
+
+[data-theme="dark"] .difficulty-easy {
+    background: rgba(76, 175, 80, 0.2);
+    color: #81C784;
+}
+
+[data-theme="dark"] .difficulty-medium {
+    background: rgba(255, 152, 0, 0.2);
+    color: #FFB74D;
+}
+
+[data-theme="dark"] .difficulty-hard {
+    background: rgba(244, 67, 54, 0.2);
+    color: #E57373;
+}
+
 /* Main Content */
 .algo-main-content {
     padding: 3rem 0;
@@ -241,8 +350,13 @@
 .resource-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
+    width: 5rem;
     font-size: 0.75rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
 }
 
 .resource-badge.ar {
@@ -253,11 +367,6 @@
 .resource-badge.en {
     background: rgba(37, 99, 235, 0.1);
     color: var(--primary);
-}
-
-.resource-badge.difficulty {
-    background: rgba(255, 152, 0, 0.1);
-    color: #ff9800;
 }
 
 /* Problems List */
@@ -286,52 +395,39 @@
 .problem-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
-    margin-bottom: 0.75rem;
 }
 
 .problem-title {
     color: var(--dark);
     font-size: 1.125rem;
+    margin-bottom: 0;
 }
 
 .problem-badges {
     display: flex;
     gap: 0.5rem;
+    margin-left: 1rem;
     flex-shrink: 0;
 }
 
 .problem-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
+    width: 5rem;
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
 }
 
 .problem-badge.platform {
     background: rgba(37, 99, 235, 0.1);
     color: var(--primary);
-}
-
-.problem-badge.difficulty {
-    background: rgba(255, 152, 0, 0.1);
-    color: #ff9800;
-}
-
-.problem-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.problem-tag {
-    padding: 0.25rem 0.75rem;
-    background: rgba(100, 100, 100, 0.1);
-    border-radius: 12px;
-    font-size: 0.75rem;
-    color: var(--dark);
 }
 
 /* Sidebar */
@@ -389,30 +485,6 @@
 .prerequisites-list li {
     color: var(--dark);
     opacity: 0.85;
-}
-
-/* CTA Section */
-.algo-cta-section {
-    background: var(--light-gray);
-    padding: 3rem 0;
-    margin-top: 2rem;
-}
-
-.cta-card {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.cta-card h2 {
-    color: var(--dark);
-    margin-bottom: 1rem;
-}
-
-.cta-card p {
-    color: var(--dark);
-    opacity: 0.8;
-    margin-bottom: 2rem;
 }
 
 /* Dark Mode */

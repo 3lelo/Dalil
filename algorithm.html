@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧭</text></svg>">
+    <link rel="icon" type="image/png" href="assets/images/icon.png">
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/main.css">
@@ -97,18 +97,8 @@
                     <h1 id="algo-title" class="algo-title">...</h1>
                     <p id="algo-description" class="algo-description">...</p>
                     <div class="algo-meta">
-                        <span class="meta-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
+                        <span class="meta-item difficulty-badge" id="algo-difficulty-container">
                             <span id="algo-difficulty">...</span>
-                        </span>
-                        <span class="meta-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                            <span id="algo-duration">...</span>
                         </span>
                     </div>
                 </div>
@@ -173,17 +163,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- CTA Section -->
-        <section class="algo-cta-section">
-            <div class="container">
-                <div class="cta-card">
-                    <h2>جاهز تبدأ التدريب؟</h2>
-                    <p>ارجع لخارطة الطريق وكمّل رحلتك بالبرمجة التنافسية</p>
-                    <a href="index.html#roadmap" class="cta-button primary">خارطة الطريق</a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
@@ -198,19 +177,87 @@
                         </svg>
                         <span>دليل</span>
                     </h3>
-                    <p class="footer-description">دليلك الشامل نحو عالم البرمجة التنافسية.</p>
+                    <p class="footer-description">دليلك الشامل نحو عالم البرمجة التنافسية.<br>نرشدك في رحلتك المليئة بالمعرفة💙</p>
                 </div>
                 <div class="footer-links">
                     <h4>روابط سريعة</h4>
                     <ul>
-                        <li><a href="index.html">الرئيسية</a></li>
-                        <li><a href="index.html#roadmap">خارطة الطريق</a></li>
-                        <li><a href="index.html#community">المجتمع</a></li>
+                        <li><a href="#hero">الرئيسية</a></li>
+                        <li><a href="#roadmap">خارطة الطريق</a></li>
+                        <li><a href="https://chat.whatsapp.com/LYK94nQM7yE2huBVjhwfBO" class="no-external-icon">المجتمع</a></li>
                     </ul>
+                    
+                    <!-- Modal Dialog -->
+                    <div id="contact-modal" class="modal">
+                        <div class="modal-overlay"></div>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">تواصل معنا</h3>
+                                <button class="modal-close" id="modal-close" aria-label="إغلاق">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <form 
+                                    id="contact-form" 
+                                    class="contact-form"
+                                    name="contact"
+                                    method="POST"
+                                    data-netlify="true"
+                                    data-netlify-honeypot="bot-field"
+                                    netlify
+                                >
+                                    <!-- Netlify Bot Field (hidden) -->
+                                    <input type="hidden" name="form-name" value="contact" />
+                                    <!-- Hidden honeypot field - visually hidden but in DOM -->
+                                    <div class="visually-hidden">
+                                        <label>
+                                            لا تملأ هذا الحقل إذا كنت إنسان: 
+                                            <input name="bot-field" class="form-input" autocomplete="off" tabindex="-1" />
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <input type="text" id="name" name="name" placeholder="اسمك" required class="form-input" autocomplete="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" id="email" name="email" placeholder="بريدك الإلكتروني" required class="form-input" autocomplete="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="message" name="message" rows="4" placeholder="رسالتك" required class="form-textarea no-resize-horizontal" autocomplete="off"></textarea>
+                                    </div>
+                                    <button type="submit" class="submit-btn form-submit-btn">إرسال الرسالة</button>
+                                    <div id="form-message" class="form-message form-message-default"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-credit">
+                    <h4 style="margin-bottom: 0.75rem; color: #cccccc">تطوير</h4>
+                    <div class="designer-links">
+                        <a href="https://www.linkedin.com/in/aliadnan08" target="_blank" class="designer-link no-external-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            علي عدنان
+                        </a>
+                        <a href="https://www.linkedin.com/in/muradhethnawi" target="_blank" class="designer-link no-external-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            مراد حثناوي
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>جميع الحقوق محفوظة © <span id="current-year"></span> دليل</p>
+                <p></p>
+                <script>
+                    document.querySelector('.footer-bottom p').textContent = 
+                    `جميع الحقوق محفوظة © ${new Date().getFullYear()} دليل`;
+                </script>
             </div>
         </div>
     </footer>
@@ -218,10 +265,8 @@
     <!-- JavaScript Files -->
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/algorithm.js"></script>
+    <script src="assets/js/back-to-top.js"></script>
     <script>
-        // Set current year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
         // Dark mode toggle
         const themeToggle = document.getElementById('themeToggle');
         const currentTheme = localStorage.getItem('theme') || 'light';

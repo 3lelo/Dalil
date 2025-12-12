@@ -7,7 +7,6 @@
       "category": "رياضيات المسابقات",
       "category_en": "Number Theory",
       "difficulty": "متوسط",
-      "duration": "2-3 أسابيع",
       "description": "الأرقام الأولية (Prime Numbers)، والقاسم المشترك الأكبر (GCD)، والمضاعف المشترك الأصغر (LCM). هاي أساس حل كثير من مسائل المسابقات.",
       "what": "نظرية الأعداد هي فرع من الرياضيات بيدرس خصائص الأعداد الصحيحة. بالبرمجة التنافسية، رح تتعلم:\n\n• **الأعداد الأولية (Primes)**: أعداد بتنقسم بس على نفسها وعلى 1\n• **القاسم المشترك الأكبر (GCD)**: أكبر عدد بيقسم عددين\n• **المضاعف المشترك الأصغر (LCM)**: أصغر عدد بينقسم على عددين\n• **الكسور والباقي (Modulo)**: العمليات الحسابية مع باقي القسمة\n\nهاي المفاهيم بتشكل الأساس لحل مسائل رياضية معقدة بكفاءة عالية.",
       "why": "• **شائعة بالمسابقات**: تقريباً كل مسابقة فيها مسألة أو اتنين عن نظرية الأعداد\n• **أساس للمواضيع المتقدمة**: مطلوبة لفهم RSA والتشفير\n• **تطوير التفكير المنطقي**: بتعلمك تفكر بطريقة رياضية منظمة\n• **مسائل ممتعة**: غالباً المسائل بتكون أحجيات ذكية",
@@ -53,23 +52,20 @@
         {
           "title": "GCD and LCM",
           "platform": "Codeforces",
-          "difficulty": "800",
-          "url": "https://codeforces.com/problemset/problem/1/A",
-          "tags": ["GCD", "LCM", "مبتدئ"]
+          "difficulty": "سهل",
+          "url": "https://codeforces.com/problemset/problem/1/A"
         },
         {
           "title": "Prime Checking",
           "platform": "HackerRank",
           "difficulty": "سهل",
-          "url": "https://www.hackerrank.com/challenges/30-primality",
-          "tags": ["أعداد أولية", "مبتدئ"]
+          "url": "https://www.hackerrank.com/challenges/30-primality"
         },
         {
           "title": "Divisibility",
           "platform": "Codeforces",
-          "difficulty": "1000",
-          "url": "https://codeforces.com/problemset/problem/230/B",
-          "tags": ["قسمة", "متوسط"]
+          "difficulty": "متوسط",
+          "url": "https://codeforces.com/problemset/problem/230/B"
         }
       ]
     },
@@ -80,7 +76,6 @@
       "category": "البحث والترتيب",
       "category_en": "Search & Sort",
       "difficulty": "مبتدئ - متوسط",
-      "duration": "1-2 أسابيع",
       "description": "هاد 'سلاح سري' بيلزمك كثير، بخليك تلاقي أي إشي بسرعة خرافية إذا كانت البيانات مرتبة. لا تستهين فيه.",
       "what": "البحث الثنائي هو خوارزمية بحث فعالة جداً بتشتغل على المصفوفات المرتبة. بدل ما تدور على كل عنصر واحد واحد (O(n))، البحث الثنائي بيقسم المصفوفة لنصين ويختار النص الصحيح، وهيك بتوصل للنتيجة بسرعة O(log n).\n\n**مثال بسيط**: لو بدك تدور على رقم بكتاب تليفونات (مرتب أبجدياً)، مش رح تبدأ من الصفحة الأولى! رح تفتح النص، وتشوف إذا الاسم قبل أو بعد، وتكمل بالنص اللي فيه الاسم. هاي فكرة Binary Search!",
       "why": "• **سرعة خيالية**: بدل ما تفحص مليون عنصر، بتفحص بس 20 عنصر!\n• **موجودة بكل مكان**: STL في C++ عندها دوال جاهزة\n• **أساس مواضيع متقدمة**: Binary Search on Answer, Ternary Search\n• **سهلة نسبياً**: من أسهل الخوارزميات القوية",
@@ -127,15 +122,13 @@
           "title": "Binary Search",
           "platform": "Codeforces",
           "difficulty": "800",
-          "url": "https://codeforces.com/edu/course/2/lesson/6/1/practice",
-          "tags": ["binary search", "مبتدئ"]
+          "url": "https://codeforces.com/edu/course/2/lesson/6/1/practice"
         },
         {
           "title": "Search Insert Position",
           "platform": "LeetCode",
           "difficulty": "سهل",
-          "url": "https://leetcode.com/problems/search-insert-position/",
-          "tags": ["binary search", "array"]
+          "url": "https://leetcode.com/problems/search-insert-position/"
         }
       ]
     }

@@ -15,6 +15,98 @@
     const algorithmContent = document.getElementById('algorithm-content');
 
     /**
+     * Get difficulty info (icon, class, color)
+     */
+    function getDifficultyInfo(difficulty) {
+        const difficultyMap = {
+            // Arabic difficulties
+            'مبتدئ': { 
+                icon: '🟢', 
+                className: 'difficulty-beginner',
+                text: 'مبتدئ'
+            },
+            'سهل': { 
+                icon: '🟢', 
+                className: 'difficulty-easy',
+                text: 'سهل'
+            },
+            'متوسط': { 
+                icon: '🟠', 
+                className: 'difficulty-intermediate',
+                text: 'متوسط'
+            },
+            'متقدم': { 
+                icon: '🔴', 
+                className: 'difficulty-advanced',
+                text: 'متقدم'
+            },
+            
+            // English difficulties
+            'beginner': { 
+                icon: '🟢', 
+                className: 'difficulty-beginner',
+                text: 'مبتدئ'
+            },
+            'easy': { 
+                icon: '🟢', 
+                className: 'difficulty-easy',
+                text: 'سهل'
+            },
+            'intermediate': { 
+                icon: '🟠', 
+                className: 'difficulty-intermediate',
+                text: 'متوسط'
+            },
+            'medium': { 
+                icon: '🟠', 
+                className: 'difficulty-medium',
+                text: 'متوسط'
+            },
+            'advanced': { 
+                icon: '🔴', 
+                className: 'difficulty-advanced',
+                text: 'متقدم'
+            },
+            'hard': { 
+                icon: '🔴', 
+                className: 'difficulty-hard',
+                text: 'صعب'
+            },
+            
+            // Range difficulties (like "مبتدئ - متوسط")
+            'مبتدئ - متوسط': { 
+                icon: '🟡', 
+                className: 'difficulty-intermediate',
+                text: 'مبتدئ - متوسط'
+            }
+        };
+        
+        // Check for exact match first
+        if (difficultyMap[difficulty]) {
+            return difficultyMap[difficulty];
+        }
+        
+        // Check if difficulty contains certain keywords
+        const lowerDifficulty = difficulty.toLowerCase();
+        if (lowerDifficulty.includes('مبتدئ') || lowerDifficulty.includes('beginner') || lowerDifficulty.includes('easy')) {
+            return difficultyMap['مبتدئ'];
+        }
+        if (lowerDifficulty.includes('متوسط') || lowerDifficulty.includes('intermediate') || lowerDifficulty.includes('medium')) {
+            return difficultyMap['متوسط'];
+        }
+        if (lowerDifficulty.includes('متقدم') || lowerDifficulty.includes('advanced') || lowerDifficulty.includes('hard')) {
+            return difficultyMap['متقدم'];
+        }
+        
+        // Default to intermediate
+        return { 
+            icon: '⚪', 
+            className: 'difficulty-intermediate',
+            text: difficulty
+        };
+    }
+
+    /**
      * Initialize the page
      */
     async function init() {
@@ -25,7 +117,7 @@
 
         try {
             // Fetch algorithms data
-            const response = await fetch('assets/data/algorithms.json');
+            const response = await fetch('/assets/data/algorithms.json');
             if (!response.ok) {
                 throw new Error('Failed to load algorithms data');
             }
@@ -75,8 +167,20 @@
         document.getElementById('algo-category').textContent = algo.category;
         document.getElementById('algo-title').textContent = algo.title;
         document.getElementById('algo-description').textContent = algo.description;
-        document.getElementById('algo-difficulty').textContent = `المستوى: ${algo.difficulty}`;
-        document.getElementById('algo-duration').textContent = `المدة: ${algo.duration}`;
+        
+        // Update difficulty with icon and dynamic color
+        const difficultyContainer = document.getElementById('algo-difficulty-container');
+        const difficultyElement = document.getElementById('algo-difficulty');
+        const difficultyInfo = getDifficultyInfo(algo.difficulty);
+        
+        // Set the icon and text
+        difficultyContainer.innerHTML = `
+            <span class="difficulty-icon">${difficultyInfo.icon}</span>
+            <span class="difficulty-text">المستوى: ${difficultyInfo.text}</span>
+        `;
+        
+        // Apply the appropriate class for styling
+        difficultyContainer.className = `meta-item difficulty-badge ${difficultyInfo.className}`;
 
         // Update what section
         const whatElement = document.getElementById('algo-what');
@@ -132,6 +236,14 @@
     }
 
     /**
+     * Get difficulty class for resources and problems
+     */
+    function getDifficultyClass(difficulty) {
+        const info = getDifficultyInfo(difficulty);
+        return info.className;
+    }
+
+    /**
      * Render learning resources
      */
     function renderResources(resources) {
@@ -147,7 +259,16 @@
             const langBadge = resource.language === 'ar' ? 
                 '<span class="resource-badge ar">عربي</span>' : 
                 '<span class="resource-badge en">English</span>';
-            const difficultyBadge = `<span class="resource-badge difficulty">${resource.difficulty}</span>`;
+            
+            // Get difficulty class and apply it
+            const difficultyClass = getDifficultyClass(resource.difficulty);
+            const difficultyInfo = getDifficultyInfo(resource.difficulty);
+            const difficultyBadge = `
+                <span class="resource-badge ${difficultyClass}">
+                    <span class="difficulty-icon-small">${difficultyInfo.icon}</span>
+                    ${resource.difficulty}
+                </span>
+            `;
 
             return `
                 <a href="${resource.url}" target="_blank" class="resource-item external-link">
@@ -177,10 +298,16 @@
 
         container.innerHTML = problems.map(problem => {
             const platformBadge = `<span class="problem-badge platform">${problem.platform}</span>`;
-            const difficultyBadge = `<span class="problem-badge difficulty">${problem.difficulty}</span>`;
-            const tags = problem.tags.map(tag => 
-                `<span class="problem-tag">${tag}</span>`
-            ).join('');
+            
+            // Get difficulty class and apply it
+            const difficultyClass = getDifficultyClass(problem.difficulty);
+            const difficultyInfo = getDifficultyInfo(problem.difficulty);
+            const difficultyBadge = `
+                <span class="problem-badge ${difficultyClass}">
+                    <span class="difficulty-icon-small">${difficultyInfo.icon}</span>
+                    ${problem.difficulty}
+                </span>
+            `;
 
             return `
                 <a href="${problem.url}" target="_blank" class="problem-item external-link">
@@ -191,7 +318,6 @@
                             ${difficultyBadge}
                         </div>
                     </div>
-                    <div class="problem-tags">${tags}</div>
                 </a>
             `;
         }).join('');
