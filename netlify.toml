@@ -7,16 +7,6 @@
   to = "/index.html"
   status = 200
 
-[[redirects]]
-  from = "/README.md"
-  to = "/index.html"
-  status = 404
-
-[[redirects]]
-  from = "/assets/*"
-  to = "/index.html"
-  status = 404
-
 # Optional: Customize form settings
 [[headers]]
   for = "/*"
