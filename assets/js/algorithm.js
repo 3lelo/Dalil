@@ -117,7 +117,7 @@
 
         try {
             // Fetch algorithms data
-            const response = await fetch('/assets/data/algorithms.json');
+            const response = await fetch('Dalil/assets/data/algorithms.json');
             if (!response.ok) {
                 throw new Error('Failed to load algorithms data');
             }
