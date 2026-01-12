@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+
+    <!-- Change this to your real Vercel URL -->
+    <script>
+      (function () {
+        const VERCEL_BASE = "https://dalil.vercel.app";
+
+        // Current location parts
+        const path = window.location.pathname.replace(/^\/Dalil/, "");
+        const search = window.location.search || "";
+        const hash = window.location.hash || "";
+
+        // Build final URL
+        const target = VERCEL_BASE + path + search + hash;
+
+        // Replace (no back button pollution)
+        window.location.replace(target);
+      })();
+    </script>
+
+    <!-- SEO hint -->
+    <link rel="canonical" href="https://dalil.vercel.app" />
+
+    <!-- No-JS fallback -->
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=https://dalil.vercel.app" />
+    </noscript>
+  </head>
+
+  <body>
+    <p>
+      Redirecting to Dalil…
+      <br />
+      <a href="https://dalil.vercel.app">Click here if you are not redirected</a>
+    </p>
+  </body>
+</html>
