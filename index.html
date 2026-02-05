@@ -4,26 +4,31 @@
     <meta charset="UTF-8" />
     <title>Redirecting…</title>
 
-    <!-- Change this to your real Vercel URL -->
     <script>
       (function () {
         const VERCEL_BASE = "https://dalil4cp.com";
 
-        // Current location parts
-        const path = window.location.pathname.replace(/^\/Dalil/, "");
+        // Remove "/Dalil" or "/Dalil/" safely
+        let path = window.location.pathname.replace(/^\/Dalil(\/|$)/, "/");
+
         const search = window.location.search || "";
         const hash = window.location.hash || "";
 
-        // Build final URL
+        // Normalize slashes
+        if (path === "") path = "/";
+
         const target = VERCEL_BASE + path + search + hash;
 
-        // Replace (no back button pollution)
+        // Replace without adding history entry
         window.location.replace(target);
       })();
     </script>
 
-    <!-- SEO hint -->
-    <link rel="canonical" href="https://https://dalil4cp.com" />
+    <!-- SEO canonical (keeps path) -->
+    <link
+      rel="canonical"
+      href="https://dalil4cp.com"
+    />
 
     <!-- No-JS fallback -->
     <noscript>
