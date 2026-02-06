@@ -6,31 +6,26 @@
 
     <script>
       (function () {
-        const VERCEL_BASE = "https://dalil4cp.com";
+        const TARGET = "https://dalil4cp.com";
 
-        // Remove "/Dalil" or "/Dalil/" safely
-        let path = window.location.pathname.replace(/^\/Dalil(\/|$)/, "/");
+        let path = window.location.pathname
+          .replace(/^\/Dalil(\/|$)/, "/")
+          .replace(/^\/+/, "/");
 
-        const search = window.location.search || "";
-        const hash = window.location.hash || "";
+        if (!path) path = "/";
 
-        // Normalize slashes
-        if (path === "") path = "/";
+        const target =
+          TARGET +
+          path +
+          window.location.search +
+          window.location.hash;
 
-        const target = VERCEL_BASE + path + search + hash;
-
-        // Replace without adding history entry
         window.location.replace(target);
       })();
     </script>
 
-    <!-- SEO canonical (keeps path) -->
-    <link
-      rel="canonical"
-      href="https://dalil4cp.com"
-    />
+    <link rel="canonical" href="https://dalil4cp.com" />
 
-    <!-- No-JS fallback -->
     <noscript>
       <meta http-equiv="refresh" content="0; url=https://dalil4cp.com" />
     </noscript>
